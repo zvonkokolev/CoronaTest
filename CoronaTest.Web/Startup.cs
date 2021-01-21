@@ -1,5 +1,6 @@
 using CoronaTest.Core.Interfaces;
 using CoronaTest.Core.Services;
+using CoronaTest.Persistence;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;

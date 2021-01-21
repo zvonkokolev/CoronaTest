@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoronaTest.PoC", "CoronaTes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoronaTest.Web", "CoronaTest.Web\CoronaTest.Web.csproj", "{AAD49EFA-AFB7-4606-BC4A-28B6FD15C828}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoronaTest.Persistence", "CoronaTest.Persistence\CoronaTest.Persistence.csproj", "{12AED648-5FA5-4B02-84B6-51D2CB530DCE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{AAD49EFA-AFB7-4606-BC4A-28B6FD15C828}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AAD49EFA-AFB7-4606-BC4A-28B6FD15C828}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AAD49EFA-AFB7-4606-BC4A-28B6FD15C828}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12AED648-5FA5-4B02-84B6-51D2CB530DCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12AED648-5FA5-4B02-84B6-51D2CB530DCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12AED648-5FA5-4B02-84B6-51D2CB530DCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12AED648-5FA5-4B02-84B6-51D2CB530DCE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

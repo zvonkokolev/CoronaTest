@@ -1,7 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using CoronaTest.Core.Entities;
+using CoronaTest.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -9,9 +13,7 @@ namespace CoronaTest.Web.Pages.Security
 {
     public class LoginModel : PageModel
     {
-        public void OnGet()
-        {
-                    private readonly IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly ISmsService _smsService;
 
         [BindProperty]
@@ -57,6 +59,5 @@ namespace CoronaTest.Web.Pages.Security
 
             return RedirectToPage("/Security/Verification", new { verificationIdentifier = verificationToken.Identifier });
         }
-    }
     }
 }

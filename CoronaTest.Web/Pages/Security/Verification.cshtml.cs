@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using CoronaTest.Core.Entities;
+using CoronaTest.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -9,9 +12,7 @@ namespace CoronaTest.Web.Pages.Security
 {
     public class VerificationModel : PageModel
     {
-        public void OnGet()
-        {
-                    private readonly IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
 
         [BindProperty]
         [Required(ErrorMessage = "Der Token ist verpflichtend")]
@@ -46,6 +47,5 @@ namespace CoronaTest.Web.Pages.Security
                 return RedirectToPage("/Security/TokenError");
             }
         }
-    }
     }
 }
