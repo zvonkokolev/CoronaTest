@@ -13,5 +13,6 @@ namespace CoronaTest.Core.Interfaces
         void UpdateTestCentersData(TestCenter oldTestCenter);
         Task<TestCenter> RemoveTestCenterAsync(int testCenterId);
         Task<int> GetCountAsync();
+        Task AddRangeAsync(List<TestCenter> testCenters);
     }
 }

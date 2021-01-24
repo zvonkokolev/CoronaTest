@@ -9,7 +9,7 @@ namespace CoronaTest.ImportConsole
 {
     public class ImportController
     {
-        public static IList<Campaign> ReadFromCsv()
+        public static List<Campaign> ReadFromCsv()
         {
             string csvCampaign = "Campaigns.csv";
             string csvTestCenters = "TestCenters.csv";
@@ -36,7 +36,20 @@ namespace CoronaTest.ImportConsole
                         To = Convert.ToDateTime(c[3])
                     })
                 .ToList();
-
+/*
+            foreach (KeyValuePair<string, TestCenter> keyValuePair in testCenters)
+            {
+                List<Campaign> campaignsList = new List<Campaign>();
+                foreach (Campaign item in campaigns)
+                {
+                    if (item.AvailableTestCenters.Contains(keyValuePair.Value))
+                    {
+                        campaignsList.Add(item);
+                    }
+                }
+                keyValuePair.Value.AvailableInCampaigns = campaignsList;
+            }
+*/
             return campaigns;
         }
     }

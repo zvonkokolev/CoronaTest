@@ -52,5 +52,9 @@ namespace CoronaTest.Persistence
 
         public async Task<int> GetCountAsync() =>
             await _dbContext.TestCenters.CountAsync();
+
+        public async Task AddRangeAsync(List<TestCenter> testCenters) =>
+            await _dbContext.TestCenters
+                .AddRangeAsync(testCenters);
     }
 }
