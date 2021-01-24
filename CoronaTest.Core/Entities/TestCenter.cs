@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CoronaTest.Core.Entities
 {
-    public class TestCenter
+    public class TestCenter : BaseEntity
     {
         public string Name { get; set; }
         public string City { get; set; }

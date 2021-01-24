@@ -9,7 +9,18 @@ namespace CoronaTest.Persistence
     public class ApplicationDbContext : DbContext
     {
         public DbSet<VerificationToken> VerificationTokens { get; set; }
+        public DbSet<Campaign> Campaigns { get; set; }
+        public DbSet<Examination> Examinations { get; set; }
+        public DbSet<Participant> Participants { get; set; }
+        public DbSet<TestCenter> TestCenters { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Campaign>()
+                 .HasMany(u => u.AvailableTestCenters);
+            modelBuilder.Entity<TestCenter>()
+                .HasMany(u => u.AvailableInCampaigns);
+        }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var configuration = new ConfigurationBuilder()

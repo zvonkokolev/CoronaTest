@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CoronaTest.Core.Entities
 {
-    public class Participant
+    public class Participant : BaseEntity
     {
         [Display(Name = "Vorname")]
         [Required(ErrorMessage = "Vorname ist verpflichtend.")]
