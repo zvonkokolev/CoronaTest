@@ -49,5 +49,8 @@ namespace CoronaTest.Persistence
             _dbContext.TestCenters
                 .Attach(oldTestCenter)
                 .State = EntityState.Modified;
+
+        public async Task<int> GetCountAsync() =>
+            await _dbContext.TestCenters.CountAsync();
     }
 }

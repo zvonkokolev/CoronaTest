@@ -62,5 +62,8 @@ namespace CoronaTest.Persistence
              => await _dbContext.Participants
             .Where(u => u.Id == id)
             .FirstOrDefaultAsync();
+
+        public async Task<int> GetCountAsync() =>
+            await _dbContext.Participants.CountAsync();
     }
 }

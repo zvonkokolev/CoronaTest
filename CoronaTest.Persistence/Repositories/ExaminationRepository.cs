@@ -36,5 +36,8 @@ namespace CoronaTest.Persistence
         public void UpdateExamination(Examination examination) =>
             _dbContext.Attach(examination).State = EntityState.Modified;
 
+        public async Task<int> GetCountAsync() =>
+            await _dbContext.Examinations.CountAsync();
+
     }
 }

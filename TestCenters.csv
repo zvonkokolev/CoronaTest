@@ -1,0 +1,16 @@
+﻿Name;City;Postalcode;Street;Capacity
+AKK Graz;Graz;8010;astr;12
+AKK Leibnitz;Leibnitz;8430;bstr;22
+AKK Leoben;Leoben;8700;cstr;20
+Stadthalle St.Pölten;St.Pölten;3100;dstr;15
+Stadthalle Amstetten;Amstetten;3300;estr;15
+Stadthalle Wiener Neustadt;Wiener Neustadt;2700;fstr;15
+Stadthalle Wels;Wels;4600;gstr;10
+Stadthalle Steyr;Steyr;4451;hstr;20
+Stadthalle Linz;Linz;4020;istr;15
+HTL Magistrat 1;Wien;1010;jstr;45
+HTL Magistrat 2;Wien;1020;kstr;35
+HTL Magistrat 3;Wien;1030;lstr;25
+HTL Linz;Linz;4030;mstr;30
+HTL Wels;Wels;4600;nstr;20
+HTL Steyr;Steyr;4400;ostr;10

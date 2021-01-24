@@ -14,5 +14,7 @@ namespace CoronaTest.Core.Interfaces
         Task AddCampaignsRangeAsync(List<Campaign> campaigns);
         void UpdateCampaignsData(Campaign oldCampaign);
         Task<Campaign> RemoveCampaignAsync(int campaignId);
+        Task AddRangeAsync(IEnumerable<Campaign> campaigns);
+        Task<int> GetCountAsync();
     }
 }

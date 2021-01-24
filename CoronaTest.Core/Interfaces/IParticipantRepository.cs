@@ -15,5 +15,6 @@ namespace CoronaTest.Core.Interfaces
         Task<bool> CheckIfParticipantSvnExistsAsync(string svn);
         void UpdateParticipantsData(Participant participant);
         Task<Participant> RemoveParticipantAsync(int participantId);
+        Task<int> GetCountAsync();
     }
 }
