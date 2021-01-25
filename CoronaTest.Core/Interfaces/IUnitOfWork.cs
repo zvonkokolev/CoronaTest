@@ -9,6 +9,11 @@ namespace CoronaTest.Core.Interfaces
     {
         IVerificationTokenRepository VerificationTokens { get; }
 
+        ICampaignRepository Campaigns { get; }
+        ITestCenterRepository TestCenters { get; }
+        IParticipantRepository Participants { get; }
+        IExaminationRepository Examinations { get; }
+
         Task<int> SaveChangesAsync();
         Task DeleteDatabaseAsync();
         Task MigrateDatabaseAsync();

@@ -9,10 +9,10 @@
         <textarea asp-for="Message" class="text-danger text-center w-full" rows="1" readonly="readonly"></textarea>
     </strong>
 </p>
+
 <body>
     <form method="post">
         <div class="form-row">
-
             <div class="form-group col-md-6">
                 <label asp-for="SocialSecurityNumber" class="control-label"></label>
                 <input asp-for="SocialSecurityNumber" class="form-control" />
@@ -24,10 +24,16 @@
                 <input asp-for="Mobilenumber" class="form-control" />
                 <span asp-validation-for="Mobilenumber" class="text-danger"></span>
             </div>
-
         </div>
-
-        <input type="submit" value="Anmelden" class="btn btn-danger" />
-        <a class="btn btn-secondary" asp-page="/Index">Zurück</a>
+        <div class="container-login100-form-btn p-t-10">
+            <input type="submit" value="Anmelden" class="btn btn-danger" />
+            <a class="btn btn-secondary" asp-page="/Index">Zurück</a>
+        </div>
+        <div class="text-center w-full">
+            <a class="txt1" asp-page="../CRUD/User/Create">
+                Neu hier? Registriere dich
+                <i class="fa fa-long-arrow-right"></i>
+            </a>
+        </div>
     </form>
 </body>

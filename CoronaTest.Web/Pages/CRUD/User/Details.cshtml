@@ -1,0 +1,103 @@
+﻿@page
+@model CoronaTest.Web.Pages.CRUD.User.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Participant</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Participant.Firstname)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Participant.Firstname)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Participant.Lastname)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Participant.Lastname)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Participant.SocialSecurityNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Participant.SocialSecurityNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Participant.Mobilephone)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Participant.Mobilephone)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Participant.PhoneNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Participant.PhoneNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Participant.Gender)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Participant.Gender)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Participant.Birthdate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Participant.Birthdate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Participant.Postalcode)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Participant.Postalcode)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Participant.City)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Participant.City)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Participant.Street)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Participant.Street)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Participant.HouseNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Participant.HouseNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Participant.Stair)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Participant.Stair)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Participant.Door)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Participant.Door)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Participant.RowVersion)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Participant.RowVersion)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Participant.Id">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

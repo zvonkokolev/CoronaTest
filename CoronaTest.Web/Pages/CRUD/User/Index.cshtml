@@ -1,0 +1,114 @@
+﻿@page
+@model CoronaTest.Web.Pages.CRUD.User.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Participant[0].Firstname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Participant[0].Lastname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Participant[0].SocialSecurityNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Participant[0].Mobilephone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Participant[0].PhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Participant[0].Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Participant[0].Birthdate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Participant[0].Postalcode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Participant[0].City)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Participant[0].Street)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Participant[0].HouseNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Participant[0].Stair)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Participant[0].Door)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Participant[0].RowVersion)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Participant) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Firstname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lastname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SocialSecurityNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mobilephone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Birthdate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Postalcode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Street)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HouseNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stair)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Door)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RowVersion)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
