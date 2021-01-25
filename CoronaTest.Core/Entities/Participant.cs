@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
@@ -16,17 +17,17 @@ namespace CoronaTest.Core.Entities
         [Required(ErrorMessage = "Familienname ist verpflichtend.")]
         public string Lastname { get; set; }
 
-        [Display(Name = "SVN")]
+        [DisplayName("SVN")]
         [Required(ErrorMessage = "Sozialversicherungsnummer ist verpflichtend.")]
-        [StringLength(10, ErrorMessage = "SVN hat genau 10 Ziffer."), MinLength(10)]
+        [StringLength(10, ErrorMessage = "SVN hat genau 10 Ziffer.", MinimumLength = 10)]
         [RegularExpression("^[0-9]*$", ErrorMessage = "Nur Zahlen sind erlaubt.")]
         public string SocialSecurityNumber { get; set; }
 
         [DataType(DataType.PhoneNumber)]
         [Display(Name = "Handynummer")]
         [Required(ErrorMessage = "Handynummer ist verpflichtend.")]
+        [StringLength(16, ErrorMessage = "Die {0} muss zw. {2} und {1} Zeichen lang sein!", MinimumLength = 7)]
         //[RegularExpression("^(?!0+$)(\\+\\d{1,3}[- ]?)?(?!0+$)\\d{10,15}$", ErrorMessage = "Bitte geben Sie eine gültige Telefonnummer ein.")]
-        [RegularExpression(@"^([0][6][0-9][0-9])([0-9]{14})$", ErrorMessage = "Bitte geben Sie eine gültige Telefonnummer ein.")]
         public string Mobilephone { get; set; }
 
         public string PhoneNumber { get; set; }

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CoronaTest.Core.Entities;
 using CoronaTest.Core.Interfaces;
+using CoronaTest.Web.Validations;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -17,15 +18,23 @@ namespace CoronaTest.Web.Pages.Security
         private readonly ISmsService _smsService;
 
         [BindProperty]
-        [Required(ErrorMessage = "Die {0} ist verpflichtend")]
-        [StringLength(10, ErrorMessage = "Die {0} muss genau 10 Zeichen lang sein!", MinimumLength = 10)]
-        [DisplayName("SVNr")]
+        [Required(ErrorMessage = "Sozialversicherungsnummer ist verpflichtend")]
+        [StringLength(10, ErrorMessage = "SVN hat genau 10 Ziffer.", MinimumLength = 10)]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Nur Zahlen sind erlaubt.")]
+        [SsnValidation]
+        [DisplayName("SVN")]
         public string SocialSecurityNumber { get; set; }
 
         [BindProperty]
-        [Required(ErrorMessage = "Die {0} ist verpflichtend")]
-        [StringLength(16, ErrorMessage = "Die {0} muss zw. {1} und {2} Zeichen lang sein!", MinimumLength = 5)]
+        [DataType(DataType.PhoneNumber)]
+        [Display(Name = "Handynummer")]
+        [Required(ErrorMessage = "Handynummer ist verpflichtend")]
+        [StringLength(16, ErrorMessage = "Die {0} muss zw. {2} und {1} Zeichen lang sein!", MinimumLength = 7)]
+        //[RegularExpression("^(?!0+$)(\\+\\d{1,3}[- ]?)?(?!0+$)\\d{10,15}$", ErrorMessage = "Bitte geben Sie eine gültige Telefonnummer ein.")]
         public string Mobilenumber { get; set; }
+
+        [BindProperty]
+        public string Message { get; set; }
 
         public LoginModel(
             IUnitOfWork unitOfWork,
@@ -39,15 +48,23 @@ namespace CoronaTest.Web.Pages.Security
         {
             if (!ModelState.IsValid)
             {
+                Message = "Angaben sind nicht korrekt";
                 return Page();
             }
 
+            if (!SsnValidation.IsValideSsn(SocialSecurityNumber))
+            {
+                ModelState.AddModelError(nameof(SocialSecurityNumber), "Diese SVNr ist unbekannt!");
+                Message = "SVN Angabe ist nicht korrekt";
+                return Page();
+            }
+/*
             if (SocialSecurityNumber != "0000080384")
             {
                 ModelState.AddModelError(nameof(SocialSecurityNumber), "Diese SVNr ist unbekannt!");
                 return Page();
             }
-
+*/
             // analog für HandyNr
 
             VerificationToken verificationToken = VerificationToken.NewToken();

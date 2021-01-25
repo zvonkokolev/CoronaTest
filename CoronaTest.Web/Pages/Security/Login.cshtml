@@ -4,25 +4,30 @@
     ViewData["Title"] = "Login";
 }
 
-<form method="post">
+<p>
+    <strong>
+        <textarea asp-for="Message" class="text-danger text-center w-full" rows="1" readonly="readonly"></textarea>
+    </strong>
+</p>
+<body>
+    <form method="post">
+        <div class="form-row">
 
-    <div class="form-row">
+            <div class="form-group col-md-6">
+                <label asp-for="SocialSecurityNumber" class="control-label"></label>
+                <input asp-for="SocialSecurityNumber" class="form-control" />
+                <span asp-validation-for="SocialSecurityNumber" class="text-danger"></span>
+            </div>
 
-        <div class="form-group col-md-6">
-            <label asp-for="SocialSecurityNumber" class="control-label"></label>
-            <input asp-for="SocialSecurityNumber" class="form-control" />
-            <span asp-validation-for="SocialSecurityNumber"></span>
+            <div class="form-group col-md-6">
+                <label asp-for="Mobilenumber" class="control-label"></label>
+                <input asp-for="Mobilenumber" class="form-control" />
+                <span asp-validation-for="Mobilenumber" class="text-danger"></span>
+            </div>
+
         </div>
 
-        <div class="form-group col-md-6">
-            <label asp-for="Mobilenumber" class="control-label"></label>
-            <input asp-for="Mobilenumber" class="form-control" />
-            <span asp-validation-for="Mobilenumber"></span>
-        </div>
-
-    </div>
-
-    <input type="submit" value="Anmelden" class="btn btn-danger" />
-    <a class="btn btn-secondary" asp-page="/Index">Zurück</a>
-
-</form>
+        <input type="submit" value="Anmelden" class="btn btn-danger" />
+        <a class="btn btn-secondary" asp-page="/Index">Zurück</a>
+    </form>
+</body>
