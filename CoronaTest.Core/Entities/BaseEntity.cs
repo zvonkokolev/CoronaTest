@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CoronaTest.Core.Entities
 {
@@ -9,6 +7,8 @@ namespace CoronaTest.Core.Entities
     {
         [Key]
         public int Id { get; set; }
+
+        [NotMapped]
         [Timestamp]
         public byte[] RowVersion { get; set; }
     }

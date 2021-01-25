@@ -30,15 +30,35 @@ namespace CoronaTest.Core.Entities
         //[RegularExpression("^(?!0+$)(\\+\\d{1,3}[- ]?)?(?!0+$)\\d{10,15}$", ErrorMessage = "Bitte geben Sie eine gültige Telefonnummer ein.")]
         public string Mobilephone { get; set; }
 
+        [DataType(DataType.PhoneNumber)]
+        [Display(Name = "Festnetz Tel.Nr.")]
         public string PhoneNumber { get; set; }
+
+        [Display(Name = "Geschlecht")]
         public string Gender { get; set; }
+
+        [DataType(DataType.Date)]
+        [Display(Name = "Geburtsdatum")]
         public DateTime Birthdate { get; set; }
+
+        [Display(Name = "Postleitzahl")]
         public string Postalcode { get; set; }
+
+        [Display(Name = "Stadt")]
         public string City { get; set; }
+
+        [Display(Name = "Strasse")]
         public string Street { get; set; }
+
+        [Display(Name = "Hausnummer")]
         public string HouseNumber { get; set; }
+
+        [Display(Name = "Stockwerk")]
         public string Stair { get; set; }
+
+        [Display(Name = "Türnummer")]
         public string Door { get; set; }
+
         public List<VerificationToken> Verifications { get; set; }
     }
 }
