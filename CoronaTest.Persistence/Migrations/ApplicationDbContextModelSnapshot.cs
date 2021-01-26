@@ -37,15 +37,10 @@ namespace CoronaTest.Persistence.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
 
-                    b.Property<int?>("TestCenterId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("To")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("TestCenterId");
 
                     b.ToTable("Campaigns");
                 });
@@ -108,7 +103,8 @@ namespace CoronaTest.Persistence.Migrations
 
                     b.Property<string>("Mobilephone")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(16)")
+                        .HasMaxLength(16);
 
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
@@ -206,13 +202,6 @@ namespace CoronaTest.Persistence.Migrations
                     b.HasIndex("ParticipantId");
 
                     b.ToTable("VerificationTokens");
-                });
-
-            modelBuilder.Entity("CoronaTest.Core.Entities.Campaign", b =>
-                {
-                    b.HasOne("CoronaTest.Core.Entities.TestCenter", null)
-                        .WithMany("AvailableInCampaigns")
-                        .HasForeignKey("TestCenterId");
                 });
 
             modelBuilder.Entity("CoronaTest.Core.Entities.Examination", b =>

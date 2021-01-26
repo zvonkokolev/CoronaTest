@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.11">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\CoronaTest.Core\CoronaTest.Core.csproj" />
     <ProjectReference Include="..\CoronaTest.Persistence\CoronaTest.Persistence.csproj" />
     <ProjectReference Include="..\CoronaTest.Utils\CoronaTest.Utils.csproj" />

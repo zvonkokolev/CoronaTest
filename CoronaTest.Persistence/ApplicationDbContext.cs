@@ -16,11 +16,12 @@ namespace CoronaTest.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //modelBuilder.Entity<TestCenter>()
+            //    .HasMany(u => u.AvailableInCampaigns);
             modelBuilder.Entity<Campaign>()
                  .HasMany(u => u.AvailableTestCenters);
-            modelBuilder.Entity<TestCenter>()
-                .HasMany(u => u.AvailableInCampaigns);
         }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var configuration = new ConfigurationBuilder()

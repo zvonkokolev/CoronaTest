@@ -1,7 +1,6 @@
 ﻿using CoronaTest.Core.Entities;
 using CoronaTest.Persistence;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -32,13 +31,25 @@ namespace CoronaTest.ImportConsole
 
             Console.WriteLine("Daten werden von csv-Dateien eingelesen");
             var campaigns = ImportController.ReadFromCsv();
-            Console.WriteLine($"  {campaigns.Count()} Kampagnen eingelesen");
 
-            await unitOfWork.Campaigns.AddRangeAsync(campaigns);
-
-            Console.WriteLine("Kampagnen werden in Datenbank gespeichert");
+            var testCenters = campaigns.SelectMany(tc => tc.AvailableTestCenters).Distinct().ToList();
+            await unitOfWork.TestCenters.AddRangeAsync(testCenters);
+            Console.WriteLine("Testzentren werden in Datenbank gespeichert");
             await unitOfWork.SaveChangesAsync();
 
+            //campaigns = campaigns
+            //    .Select(c => new Campaign
+            //    {
+            //        Name = c.Name,
+            //        AvailableTestCenters = c.AvailableTestCenters,
+            //        From = c.From,
+            //        To = c.To
+            //    })
+            //    .ToList();
+
+            await unitOfWork.Campaigns.AddRangeAsync(campaigns);
+            Console.WriteLine("Kampagnen werden in Datenbank gespeichert");
+            await unitOfWork.SaveChangesAsync();
 
             var cntCampaigns = await unitOfWork.Campaigns.GetCountAsync();
             var cntTestCenters = await unitOfWork.TestCenters.GetCountAsync();

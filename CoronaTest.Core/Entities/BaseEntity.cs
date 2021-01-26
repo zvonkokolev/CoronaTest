@@ -1,14 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using CoronaTest.Core.Interfaces;
+using System.ComponentModel.DataAnnotations;
 
 namespace CoronaTest.Core.Entities
 {
-    public class BaseEntity
+    public class BaseEntity : IBaseEntity
     {
         [Key]
         public int Id { get; set; }
 
-        [NotMapped]
         [Timestamp]
         public byte[] RowVersion { get; set; }
     }

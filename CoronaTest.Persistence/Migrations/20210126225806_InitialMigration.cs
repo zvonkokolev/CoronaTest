@@ -8,6 +8,22 @@ namespace CoronaTest.Persistence.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Campaigns",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RowVersion = table.Column<byte[]>(rowVersion: true, nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    From = table.Column<DateTime>(nullable: false),
+                    To = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Campaigns", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Participants",
                 columns: table => new
                 {
@@ -17,7 +33,7 @@ namespace CoronaTest.Persistence.Migrations
                     Firstname = table.Column<string>(maxLength: 20, nullable: false),
                     Lastname = table.Column<string>(nullable: false),
                     SocialSecurityNumber = table.Column<string>(maxLength: 10, nullable: false),
-                    Mobilephone = table.Column<string>(nullable: false),
+                    Mobilephone = table.Column<string>(maxLength: 16, nullable: false),
                     PhoneNumber = table.Column<string>(nullable: true),
                     Gender = table.Column<string>(nullable: true),
                     Birthdate = table.Column<DateTime>(nullable: false),
@@ -31,6 +47,31 @@ namespace CoronaTest.Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Participants", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TestCenters",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RowVersion = table.Column<byte[]>(rowVersion: true, nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    City = table.Column<string>(nullable: true),
+                    Postalcode = table.Column<string>(nullable: true),
+                    Street = table.Column<string>(nullable: true),
+                    SlotCapacity = table.Column<int>(nullable: false),
+                    CampaignId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TestCenters", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TestCenters_Campaigns_CampaignId",
+                        column: x => x.CampaignId,
+                        principalTable: "Campaigns",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -58,48 +99,6 @@ namespace CoronaTest.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TestCenters",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    RowVersion = table.Column<byte[]>(rowVersion: true, nullable: true),
-                    Name = table.Column<string>(nullable: true),
-                    City = table.Column<string>(nullable: true),
-                    Postalcode = table.Column<string>(nullable: true),
-                    Street = table.Column<string>(nullable: true),
-                    SlotCapacity = table.Column<int>(nullable: false),
-                    CampaignId = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TestCenters", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Campaigns",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    RowVersion = table.Column<byte[]>(rowVersion: true, nullable: true),
-                    Name = table.Column<string>(nullable: true),
-                    From = table.Column<DateTime>(nullable: false),
-                    To = table.Column<DateTime>(nullable: false),
-                    TestCenterId = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Campaigns", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Campaigns_TestCenters_TestCenterId",
-                        column: x => x.TestCenterId,
-                        principalTable: "TestCenters",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Examinations",
                 columns: table => new
                 {
@@ -121,11 +120,6 @@ namespace CoronaTest.Persistence.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Campaigns_TestCenterId",
-                table: "Campaigns",
-                column: "TestCenterId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Examinations_ExaminationAtId",
                 table: "Examinations",
                 column: "ExaminationAtId");
@@ -139,22 +133,10 @@ namespace CoronaTest.Persistence.Migrations
                 name: "IX_VerificationTokens_ParticipantId",
                 table: "VerificationTokens",
                 column: "ParticipantId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_TestCenters_Campaigns_CampaignId",
-                table: "TestCenters",
-                column: "CampaignId",
-                principalTable: "Campaigns",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Campaigns_TestCenters_TestCenterId",
-                table: "Campaigns");
-
             migrationBuilder.DropTable(
                 name: "Examinations");
 
@@ -162,10 +144,10 @@ namespace CoronaTest.Persistence.Migrations
                 name: "VerificationTokens");
 
             migrationBuilder.DropTable(
-                name: "Participants");
+                name: "TestCenters");
 
             migrationBuilder.DropTable(
-                name: "TestCenters");
+                name: "Participants");
 
             migrationBuilder.DropTable(
                 name: "Campaigns");

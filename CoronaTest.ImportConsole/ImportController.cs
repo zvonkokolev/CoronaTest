@@ -3,7 +3,6 @@ using CoronaTest.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace CoronaTest.ImportConsole
 {
@@ -36,20 +35,18 @@ namespace CoronaTest.ImportConsole
                         To = Convert.ToDateTime(c[3])
                     })
                 .ToList();
-/*
-            foreach (KeyValuePair<string, TestCenter> keyValuePair in testCenters)
+
+            foreach (KeyValuePair<string, TestCenter> testCenter in testCenters)
             {
-                List<Campaign> campaignsList = new List<Campaign>();
                 foreach (Campaign item in campaigns)
                 {
-                    if (item.AvailableTestCenters.Contains(keyValuePair.Value))
+                    if (item.AvailableTestCenters.Contains(testCenter.Value))
                     {
-                        campaignsList.Add(item);
+                        testCenter.Value.AvailableInCampaigns.Add(item);
                     }
                 }
-                keyValuePair.Value.AvailableInCampaigns = campaignsList;
             }
-*/
+
             return campaigns;
         }
     }

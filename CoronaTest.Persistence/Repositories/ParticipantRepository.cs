@@ -1,10 +1,7 @@
 ﻿using CoronaTest.Core.Entities;
 using CoronaTest.Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CoronaTest.Persistence
@@ -21,9 +18,9 @@ namespace CoronaTest.Persistence
         public async Task AddParticipantAsync(Participant newParticipant)
              => await _dbContext.Participants.AddAsync(newParticipant);
 
-        public void UpdateParticipantsData(Participant Participant)
+        public void UpdateParticipantsData(Participant participant)
         {
-            _dbContext.Attach(Participant).State = EntityState.Modified;
+            _dbContext.Participants.Update(participant);
         }
 
         public async Task<Participant> RemoveParticipantAsync(int participantId)
