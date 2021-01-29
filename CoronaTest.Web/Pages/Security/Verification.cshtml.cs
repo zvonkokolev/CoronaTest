@@ -20,6 +20,9 @@ namespace CoronaTest.Web.Pages.Security
         public int Token { get; set; }
 
         [BindProperty]
+        public int ParticipantId { get; set; }
+
+        [BindProperty]
         public Guid VerificationIdentifier { get; set; }
 
         public VerificationModel(IUnitOfWork unitOfWork)
@@ -27,20 +30,27 @@ namespace CoronaTest.Web.Pages.Security
             _unitOfWork = unitOfWork;
         }
 
-        public IActionResult OnGet(Guid verificationIdentifier)
+        public IActionResult OnGet(Guid verificationIdentifier, int participantId)
         {
             VerificationIdentifier = verificationIdentifier;
-
+            ParticipantId = participantId;
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
-            VerificationToken verificationToken = await _unitOfWork.VerificationTokens.GetTokenByIdentifierAsync(VerificationIdentifier);
+            VerificationToken verificationToken = await _unitOfWork.VerificationTokens
+                .GetTokenByIdentifierAsync(VerificationIdentifier);
 
             if (verificationToken.Token == Token && verificationToken.ValidUntil >= DateTime.Now)
             {
-                return RedirectToPage("/Security/Success", new { verificationIdentifier = verificationToken.Identifier });
+                return RedirectToPage("/Security/Success", 
+                    new 
+                    { 
+                        verificationIdentifier = verificationToken.Identifier, 
+                        participantId = ParticipantId
+                    }
+                );
             }
             else
             {

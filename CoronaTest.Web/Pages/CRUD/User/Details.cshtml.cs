@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 using CoronaTest.Core.Entities;
-using CoronaTest.Persistence;
 using CoronaTest.Core.Interfaces;
 
 namespace CoronaTest.Web.Pages.CRUD.User
@@ -22,8 +18,15 @@ namespace CoronaTest.Web.Pages.CRUD.User
 
         public Participant Participant { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(Guid verificationIdentifier, int? id)
         {
+            VerificationToken verificationToken = await _unitOfWork.VerificationTokens
+                                    .GetTokenByIdentifierAsync(verificationIdentifier);
+            if (verificationToken.ValidUntil >= DateTime.Now)
+            {
+                return RedirectToPage("../Security/TokenError");
+            }
+
             if (id == null)
             {
                 return NotFound();

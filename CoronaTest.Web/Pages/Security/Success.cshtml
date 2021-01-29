@@ -4,3 +4,20 @@
     ViewData["Title"] = "Success";
 }
 <h3>Der Token ist gültig!</h3>
+<textarea asp-for="Message" class="text-danger text-center w-full" style="background-color: #00c6fb"
+          rows="1" cols="65" readonly="readonly">
+</textarea>
+<body>
+    <div class="wrap-login100 p-t-0 p-b-30">
+        <form class="login100-form validate-form" method="post">
+            <div class="container-login100-form-btn p-t-10">
+                <input type="submit" value="Termin reservieren" class="visible-true" asp-page-handler="examinate">
+            </div>
+            <div class="container-login100-form-btn p-t-10">
+                <input type="submit" value="Profil Einstellungen" class="visible-true" asp-page-handler="setprofile">
+            </div>
+            <input type="hidden" asp-for="VerificationIdentifier" />
+            <input type="hidden" asp-for="ParticipantId" />
+        </form>
+    </div>
+</body>

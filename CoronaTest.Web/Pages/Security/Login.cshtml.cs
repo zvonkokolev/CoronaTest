@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
@@ -70,8 +71,18 @@ namespace CoronaTest.Web.Pages.Security
             await _unitOfWork.SaveChangesAsync();
 
             _smsService.SendSms(Mobilenumber, $"CoronaTest - Token: {verificationToken.Token} !");
-
-            return RedirectToPage("/Security/Verification", new { verificationIdentifier = verificationToken.Identifier });
+            Participant participant;
+            try
+            {
+                participant = await _unitOfWork.Participants.GetParticipantByPhoneAsync(Mobilenumber);
+            }
+            catch(Exception)
+            {
+                Message = "Teilnehmer nicht vorhanden";
+                return Page();
+            }
+             
+            return RedirectToPage("/Security/Verification", new { verificationIdentifier = verificationToken.Identifier, participantId = participant.Id });
         }
     }
 }
