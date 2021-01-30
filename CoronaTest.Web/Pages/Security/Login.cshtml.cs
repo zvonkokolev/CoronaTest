@@ -19,7 +19,6 @@ namespace CoronaTest.Web.Pages.Security
         [Required(ErrorMessage = "Sozialversicherungsnummer ist verpflichtend")]
         [StringLength(10, ErrorMessage = "SVN hat genau 10 Ziffer.", MinimumLength = 10)]
         [RegularExpression("^[0-9]*$", ErrorMessage = "Nur Zahlen sind erlaubt.")]
-        [SsnValidation]
         [DisplayName("SVN")]
         public string SocialSecurityNumber { get; set; }
 
@@ -56,13 +55,13 @@ namespace CoronaTest.Web.Pages.Security
                 Message = "SVN Angabe ist nicht korrekt";
                 return Page();
             }
-/*
-            if (SocialSecurityNumber != "0000080384")
-            {
-                ModelState.AddModelError(nameof(SocialSecurityNumber), "Diese SVNr ist unbekannt!");
-                return Page();
-            }
-*/
+            /*
+                        if (SocialSecurityNumber != "0000080384")
+                        {
+                            ModelState.AddModelError(nameof(SocialSecurityNumber), "Diese SVNr ist unbekannt!");
+                            return Page();
+                        }
+            */
             // analog für HandyNr
 
             VerificationToken verificationToken = VerificationToken.NewToken();
@@ -70,18 +69,24 @@ namespace CoronaTest.Web.Pages.Security
             await _unitOfWork.VerificationTokens.AddAsync(verificationToken);
             await _unitOfWork.SaveChangesAsync();
 
-            _smsService.SendSms(Mobilenumber, $"CoronaTest - Token: {verificationToken.Token} !");
+            //_smsService.SendSms(Mobilenumber, $"CoronaTest - Token: {verificationToken.Token} !");
+            verificationToken.Token = 784548;
             Participant participant;
             try
             {
                 participant = await _unitOfWork.Participants.GetParticipantByPhoneAsync(Mobilenumber);
+                if (participant == null)
+                {
+                    Message = "Teilnehmer nicht vorhanden";
+                    return Page();
+                }
             }
-            catch(Exception)
+            catch (Exception)
             {
-                Message = "Teilnehmer nicht vorhanden";
+                Message = "Datenbank fehlerhaft";
                 return Page();
             }
-             
+
             return RedirectToPage("/Security/Verification", new { verificationIdentifier = verificationToken.Identifier, participantId = participant.Id });
         }
     }

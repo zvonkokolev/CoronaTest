@@ -37,7 +37,7 @@ namespace CoronaTest.Web.Pages.Security
                 return Page();
             }
 
-            if (verificationToken.ValidUntil >= DateTime.Now)
+            if (verificationToken.ValidUntil < DateTime.Now)
             {
                 return RedirectToPage("/Security/TokenError");
             }

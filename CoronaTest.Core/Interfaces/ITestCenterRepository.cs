@@ -6,7 +6,7 @@ namespace CoronaTest.Core.Interfaces
 {
     public interface ITestCenterRepository
     {
-        Task<TestCenter[]> GetAllTestCentersAsync();
+        Task<List<TestCenter>> GetAllTestCentersAsync();
         Task<TestCenter> GetTestCenterByIdAsync(int id);
         Task AddTestCenterAsync(TestCenter newTestCenter);
         Task AddTestCentersRangeAsync(List<TestCenter> testCenters);

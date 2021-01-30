@@ -26,14 +26,13 @@ namespace CoronaTest.Persistence
             await _dbContext.TestCenters
             .AddRangeAsync(testCenters);
 
-        public async Task<TestCenter[]> GetAllTestCentersAsync() =>
+        public async Task<List<TestCenter>> GetAllTestCentersAsync() =>
             await _dbContext.TestCenters
-            .ToArrayAsync();
+            .ToListAsync();
 
         public async Task<TestCenter> GetTestCenterByIdAsync(int id) =>
             await _dbContext.TestCenters
-                .Include(a => a.AvailableInCampaigns)
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .SingleOrDefaultAsync(a => a.Id == id);
 
         public async Task<TestCenter> RemoveTestCenterAsync(int testCenterId)
         {
@@ -56,5 +55,6 @@ namespace CoronaTest.Persistence
         public async Task AddRangeAsync(List<TestCenter> testCenters) =>
             await _dbContext.TestCenters
                 .AddRangeAsync(testCenters);
+
     }
 }

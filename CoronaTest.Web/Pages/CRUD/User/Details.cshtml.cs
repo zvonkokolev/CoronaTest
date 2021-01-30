@@ -22,7 +22,7 @@ namespace CoronaTest.Web.Pages.CRUD.User
         {
             VerificationToken verificationToken = await _unitOfWork.VerificationTokens
                                     .GetTokenByIdentifierAsync(verificationIdentifier);
-            if (verificationToken.ValidUntil >= DateTime.Now)
+            if (verificationToken.ValidUntil < DateTime.Now)
             {
                 return RedirectToPage("../Security/TokenError");
             }

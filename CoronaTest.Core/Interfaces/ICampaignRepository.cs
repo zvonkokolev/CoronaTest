@@ -8,7 +8,7 @@ namespace CoronaTest.Core.Interfaces
 {
     public interface ICampaignRepository
     {
-        Task<Campaign[]> GetAllCampaignsAsync();
+        Task<List<Campaign>> GetAllCampaignsAsync();
         Task<Campaign> GetCampaignByIdAsync(int id);
         Task AddCampaignAsync(Campaign newCampaign);
         Task AddCampaignsRangeAsync(List<Campaign> campaigns);

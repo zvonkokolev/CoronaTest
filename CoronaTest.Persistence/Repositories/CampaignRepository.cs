@@ -30,9 +30,10 @@ namespace CoronaTest.Persistence
             await _dbContext.Campaigns
             .AddRangeAsync(campaigns);
 
-        public async Task<Campaign[]> GetAllCampaignsAsync() =>
+        public async Task<List<Campaign>> GetAllCampaignsAsync() =>
             await _dbContext.Campaigns
-            .ToArrayAsync();
+            .Include(c => c.AvailableTestCenters)
+            .ToListAsync();
 
         public async Task<Campaign> GetCampaignByIdAsync(int id) =>
             await _dbContext.Campaigns
