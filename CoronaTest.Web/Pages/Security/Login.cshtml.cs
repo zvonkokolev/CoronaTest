@@ -69,8 +69,8 @@ namespace CoronaTest.Web.Pages.Security
             await _unitOfWork.VerificationTokens.AddAsync(verificationToken);
             await _unitOfWork.SaveChangesAsync();
 
-            //_smsService.SendSms(Mobilenumber, $"CoronaTest - Token: {verificationToken.Token} !");
-            verificationToken.Token = 784548;
+            _smsService.SendSms(Mobilenumber, $"CoronaTest - Token: {verificationToken.Token} !");
+            // verificationToken.Token = 784548;
             Participant participant;
             try
             {
