@@ -1,4 +1,4 @@
-[![Z|Kolev](https://github.com/zvonkokolev/CoronaTest/blob/master/crts.png)
+[!Z. |Kolev](https://github.com/zvonkokolev/CoronaTest/blob/master/crts.png)]
 ## Aufgabenstellung
 Setzen eine Web Seite mithilfe von Razor Pages mit folgenden Anforderungen:
 > - Bereitstellung einer Web-Seite auf welcher sich Personen (Participant) registrieren können.
