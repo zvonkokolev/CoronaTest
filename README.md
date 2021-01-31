@@ -20,7 +20,9 @@ Setzen eine Web Seite mithilfe von Razor Pages mit folgenden Anforderungen:
   - MsSql Datenbank erstellt und migriert nach "code first" Prinzip
   - "Unit of work" und "Repositories" mit CRUD Methoden
   - SMS Versand über Twilio.com integriert und auf Funktion getestet
+  - Razor Seiten für WEB Applikation
+  - Login Maske
 
 #### Todos
- - Razor Seiten für WEB Applikation
- - Login Maske
+ - Test auf richtige Funktion
+ - Schönheitsfehler ausbessern
