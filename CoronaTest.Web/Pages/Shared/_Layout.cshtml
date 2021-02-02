@@ -6,8 +6,63 @@
     <title>@ViewData["Title"] - CoronaTest.Web</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+
+    <!------------------------- Start loading process ------------------------------------->
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+
+    <style type="text/css">
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: black;
+            z-index: 99;
+            opacity: 0.8;
+            filter: alpha(opacity=80);
+            -moz-opacity: 0.8;
+            min-height: 100%;
+            width: 100%;
+        }
+
+        .loading {
+            font-family: Arial;
+            font-size: 10pt;
+            border: 5px solid #67CFF5;
+            width: 200px;
+            height: 100px;
+            display: none;
+            position: fixed;
+            background-color: White;
+            z-index: 999;
+        }
+    </style>
+    <!-------------------------- The End ------------------------------------------------->
 </head>
 <body>
+    <!-------------------------- Start loading process ----------------------------------->
+    <div class="loading" align="center">
+        Loading. Please wait.<br />
+        <br />
+        <img src="/Images/loader.gif" alt="" />
+    </div>
+    <script type="text/javascript">
+        var modal, loading;
+        function ShowProgress() {
+            modal = document.createElement("DIV");
+            modal.className = "modal";
+            document.body.appendChild(modal);
+            loading = document.getElementsByClassName("loading")[0];
+            loading.style.display = "block";
+            var top = Math.max(window.innerHeight / 2 - loading.offsetHeight / 2, 0);
+            var left = Math.max(window.innerWidth / 2 - loading.offsetWidth / 2, 0);
+            loading.style.top = top + "px";
+            loading.style.left = left + "px";
+        };
+        ShowProgress();
+    </script>
+
+    <!-- Keep the Page Content Here.-->
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
@@ -58,5 +113,17 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     @RenderSection("Scripts", required: false)
+
+    <!-- Keep the Page Content Here.-->
+
+    <script type="text/javascript">
+        window.onload = function () {
+            setTimeout(function () {
+                document.body.removeChild(modal);
+                loading.style.display = "none";
+            }, 2000);
+        };
+    </script>
+    <!-------------------------- The End ------------------------------------------------->
 </body>
 </html>
