@@ -16,12 +16,6 @@ namespace CoronaTest.Core.Entities
         [DisplayName("Kapazität")]
         public int SlotCapacity { get; set; }
 
-        [NotMapped]
         public ICollection<Campaign> AvailableInCampaigns { get; set; }
-
-        public TestCenter()
-        {
-            AvailableInCampaigns = new List<Campaign>();
-        }
     }
 }

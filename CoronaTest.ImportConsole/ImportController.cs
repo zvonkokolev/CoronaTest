@@ -36,17 +36,6 @@ namespace CoronaTest.ImportConsole
                     })
                 .ToList();
 
-            foreach (KeyValuePair<string, TestCenter> testCenter in testCenters)
-            {
-                foreach (Campaign item in campaigns)
-                {
-                    if (item.AvailableTestCenters.Contains(testCenter.Value))
-                    {
-                        testCenter.Value.AvailableInCampaigns.Add(item);
-                    }
-                }
-            }
-
             return campaigns;
         }
     }

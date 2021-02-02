@@ -16,8 +16,8 @@ namespace CoronaTest.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<TestCenter>()
-            //    .HasMany(u => u.AvailableInCampaigns);
+            modelBuilder.Entity<TestCenter>()
+                .HasMany(u => u.AvailableInCampaigns);
             modelBuilder.Entity<Campaign>()
                  .HasMany(u => u.AvailableTestCenters);
         }

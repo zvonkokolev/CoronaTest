@@ -10,23 +10,38 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CoronaTest.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210126225806_InitialMigration")]
+    [Migration("20210202172031_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.11")
+                .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "5.0.0");
+
+            modelBuilder.Entity("CampaignTestCenter", b =>
+                {
+                    b.Property<int>("AvailableInCampaignsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AvailableTestCentersId")
+                        .HasColumnType("int");
+
+                    b.HasKey("AvailableInCampaignsId", "AvailableTestCentersId");
+
+                    b.HasIndex("AvailableTestCentersId");
+
+                    b.ToTable("CampaignTestCenter");
+                });
 
             modelBuilder.Entity("CoronaTest.Core.Entities.Campaign", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<DateTime>("From")
                         .HasColumnType("datetime2");
@@ -52,7 +67,7 @@ namespace CoronaTest.Persistence.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<int?>("ExaminationAtId")
                         .HasColumnType("int");
@@ -77,7 +92,7 @@ namespace CoronaTest.Persistence.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<DateTime>("Birthdate")
                         .HasColumnType("datetime2");
@@ -90,8 +105,8 @@ namespace CoronaTest.Persistence.Migrations
 
                     b.Property<string>("Firstname")
                         .IsRequired()
-                        .HasColumnType("nvarchar(20)")
-                        .HasMaxLength(20);
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("Gender")
                         .HasColumnType("nvarchar(max)");
@@ -105,8 +120,8 @@ namespace CoronaTest.Persistence.Migrations
 
                     b.Property<string>("Mobilephone")
                         .IsRequired()
-                        .HasColumnType("nvarchar(16)")
-                        .HasMaxLength(16);
+                        .HasMaxLength(16)
+                        .HasColumnType("nvarchar(16)");
 
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
@@ -121,8 +136,8 @@ namespace CoronaTest.Persistence.Migrations
 
                     b.Property<string>("SocialSecurityNumber")
                         .IsRequired()
-                        .HasColumnType("nvarchar(10)")
-                        .HasMaxLength(10);
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("Stair")
                         .HasColumnType("nvarchar(max)");
@@ -140,10 +155,7 @@ namespace CoronaTest.Persistence.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("CampaignId")
-                        .HasColumnType("int");
+                        .UseIdentityColumn();
 
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
@@ -167,8 +179,6 @@ namespace CoronaTest.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CampaignId");
-
                     b.ToTable("TestCenters");
                 });
 
@@ -177,7 +187,7 @@ namespace CoronaTest.Persistence.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<Guid>("Identifier")
                         .HasColumnType("uniqueidentifier");
@@ -206,18 +216,28 @@ namespace CoronaTest.Persistence.Migrations
                     b.ToTable("VerificationTokens");
                 });
 
+            modelBuilder.Entity("CampaignTestCenter", b =>
+                {
+                    b.HasOne("CoronaTest.Core.Entities.Campaign", null)
+                        .WithMany()
+                        .HasForeignKey("AvailableInCampaignsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CoronaTest.Core.Entities.TestCenter", null)
+                        .WithMany()
+                        .HasForeignKey("AvailableTestCentersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("CoronaTest.Core.Entities.Examination", b =>
                 {
                     b.HasOne("CoronaTest.Core.Entities.TestCenter", "ExaminationAt")
                         .WithMany()
                         .HasForeignKey("ExaminationAtId");
-                });
 
-            modelBuilder.Entity("CoronaTest.Core.Entities.TestCenter", b =>
-                {
-                    b.HasOne("CoronaTest.Core.Entities.Campaign", null)
-                        .WithMany("AvailableTestCenters")
-                        .HasForeignKey("CampaignId");
+                    b.Navigation("ExaminationAt");
                 });
 
             modelBuilder.Entity("CoronaTest.Core.Entities.VerificationToken", b =>
@@ -225,6 +245,11 @@ namespace CoronaTest.Persistence.Migrations
                     b.HasOne("CoronaTest.Core.Entities.Participant", null)
                         .WithMany("Verifications")
                         .HasForeignKey("ParticipantId");
+                });
+
+            modelBuilder.Entity("CoronaTest.Core.Entities.Participant", b =>
+                {
+                    b.Navigation("Verifications");
                 });
 #pragma warning restore 612, 618
         }
