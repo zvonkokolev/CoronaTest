@@ -1,0 +1,55 @@
+﻿@page
+@model CoronaTest.Web.Pages.CRUD.Testzentrum.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Bearbeiten</h1>
+
+<h4>Testzentrum</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="TestCenter.Name" class="control-label"></label>
+                <input asp-for="TestCenter.Name" class="form-control" />
+                <span asp-validation-for="TestCenter.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TestCenter.City" class="control-label"></label>
+                <input asp-for="TestCenter.City" class="form-control" />
+                <span asp-validation-for="TestCenter.City" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TestCenter.Postalcode" class="control-label"></label>
+                <input asp-for="TestCenter.Postalcode" class="form-control" />
+                <span asp-validation-for="TestCenter.Postalcode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TestCenter.Street" class="control-label"></label>
+                <input asp-for="TestCenter.Street" class="form-control" />
+                <span asp-validation-for="TestCenter.Street" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TestCenter.SlotCapacity" class="control-label"></label>
+                <input asp-for="TestCenter.SlotCapacity" class="form-control" />
+                <span asp-validation-for="TestCenter.SlotCapacity" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="TestCenter.Id" />
+            <div class="form-group">
+                <input type="submit" value="Speichern" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Index</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,54 @@
+﻿@page
+@model CoronaTest.Web.Pages.CRUD.Testzentrum.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Neuer Testzenrum</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TestCenters[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TestCenters[0].City)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TestCenters[0].Postalcode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TestCenters[0].SlotCapacity)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.TestCenters) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Postalcode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SlotCapacity)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Bearbeiten</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Löschen</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
