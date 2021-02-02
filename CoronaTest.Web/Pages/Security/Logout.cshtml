@@ -1,0 +1,26 @@
+﻿@page
+@model CoronaTest.Web.Pages.Security.LogoutModel
+@{
+    ViewData["Title"] = "Logout";
+}
+<h1>Aufwiedersehen</h1>
+<hr />
+<p>
+    <strong>
+        <textarea asp-for="Message" class="text-danger text-center w-full" rows="1" readonly="readonly"></textarea>
+    </strong>
+</p>
+@*
+<body>
+    <form method="post" enctype="multipart/form-data">
+
+        <input type="hidden" asp-for="@Model.LoggedUserId" name="id">
+
+        <button type="submit" class="text-center p-t-5 p-b-5 p-l-15 p-r-15"
+                asp-page-handler="logout" id="id">
+            Abmelden <i class="fa fa-long-arrow-down"></i>
+        </button>
+
+    </form>
+</body>
+*@

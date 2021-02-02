@@ -11,9 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoronaTest.Web", "CoronaTes
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoronaTest.Persistence", "CoronaTest.Persistence\CoronaTest.Persistence.csproj", "{12AED648-5FA5-4B02-84B6-51D2CB530DCE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoronaTest.Utils", "CoronaTest.Utils\CoronaTest.Utils.csproj", "{A4D016D9-EEE0-4217-B8DD-686BC34188B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoronaTest.Utils", "CoronaTest.Utils\CoronaTest.Utils.csproj", "{A4D016D9-EEE0-4217-B8DD-686BC34188B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoronaTest.ImportConsole", "CoronaTest.ImportConsole\CoronaTest.ImportConsole.csproj", "{F0A92589-3887-4D42-ACCC-29DB9989DBF5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoronaTest.ImportConsole", "CoronaTest.ImportConsole\CoronaTest.ImportConsole.csproj", "{F0A92589-3887-4D42-ACCC-29DB9989DBF5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

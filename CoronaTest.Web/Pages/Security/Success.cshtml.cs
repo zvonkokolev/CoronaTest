@@ -27,8 +27,20 @@ namespace CoronaTest.Web.Pages.Security
 
         public async Task<IActionResult> OnGetAsync(Guid verificationIdentifier, int participantId)
         {
+            // ---------- request cookie ------------
+            var cookieValue = Request.Cookies["MyCookieId"];
+            if (cookieValue == null)
+            {
+                Message = "Benutzer war nicht angemeldet";
+                return RedirectToPage("Login", Message);
+            }
+            // LoggedUserId = int.Parse(cookieValue);
+            // --------------------------------------
+
             VerificationIdentifier = verificationIdentifier;
-            VerificationToken verificationToken = await _unitOfWork.VerificationTokens.GetTokenByIdentifierAsync(verificationIdentifier);
+            VerificationToken verificationToken = await _unitOfWork
+                .VerificationTokens
+                .GetTokenByIdentifierAsync(verificationIdentifier);
             ParticipantId = participantId;
 
             if (!ModelState.IsValid)

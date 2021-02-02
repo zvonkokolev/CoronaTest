@@ -33,7 +33,8 @@ namespace CoronaTest.Web.Pages.CRUD.User
             await _unitOfWork.Participants.AddParticipantAsync(Participant);
             await _unitOfWork.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            // return RedirectToPage("./Index");
+            return RedirectToPage("../../Security/Login", new { message = "Danke für Anmeldung"});
         }
     }
 }

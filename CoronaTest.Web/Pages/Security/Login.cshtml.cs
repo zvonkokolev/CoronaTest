@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using CoronaTest.Core.Entities;
 using CoronaTest.Core.Interfaces;
 using CoronaTest.Web.Validations;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -41,6 +42,20 @@ namespace CoronaTest.Web.Pages.Security
             _smsService = smsService;
         }
 
+        public async Task<IActionResult> OnGetAsync(string message)
+        {
+            // ---------- request cookie ------------
+            var cookieValue = Request.Cookies["MyCookieId"];
+            if (cookieValue == null)
+            {
+                Message = "Benutzer ist nicht angemeldet";
+                return Page();
+            }
+            // --------------------------------------
+            Message = message;
+            return Page();
+        }
+
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -69,12 +84,13 @@ namespace CoronaTest.Web.Pages.Security
             await _unitOfWork.VerificationTokens.AddAsync(verificationToken);
             await _unitOfWork.SaveChangesAsync();
 
-            _smsService.SendSms(Mobilenumber, $"CoronaTest - Token: {verificationToken.Token} !");
-            // verificationToken.Token = 784548;
+            // _smsService.SendSms(Mobilenumber, $"CoronaTest - Token: {verificationToken.Token} !");
+            verificationToken.Token = 641310; // for test, comment out above line and put this line active 
             Participant participant;
             try
             {
-                participant = await _unitOfWork.Participants.GetParticipantByPhoneAsync(Mobilenumber);
+                participant = await _unitOfWork.Participants
+                    .GetParticipantByPhoneAsync(Mobilenumber);
                 if (participant == null)
                 {
                     Message = "Teilnehmer nicht vorhanden";
@@ -86,7 +102,16 @@ namespace CoronaTest.Web.Pages.Security
                 Message = "Datenbank fehlerhaft";
                 return Page();
             }
-
+            // ----- set cookie using Microsoft.AspNetCore.Http --------------
+            CookieOptions option = new CookieOptions
+            {
+                Path = "/",
+                HttpOnly = false,
+                IsEssential = true,
+                Expires = DateTime.Now.AddMinutes(15)
+            };
+            Response.Cookies.Append("MyCookieId", $"{participant.Id}", option);
+            // ---------------------------------------------------------------
             return RedirectToPage("/Security/Verification", new { verificationIdentifier = verificationToken.Identifier, participantId = participant.Id });
         }
     }
