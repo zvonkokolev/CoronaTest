@@ -21,7 +21,19 @@ Setzen eine Web Seite mithilfe von Razor Pages mit folgenden Anforderungen:
   - SMS Versand über Twilio.com integriert und auf Funktion getestet
   - Razor Seiten für WEB Applikation
   - Login Maske
-
+ - Schönheitsfehler ausbessern
+ 
 #### Todos
  - Test auf richtige Funktion
- - Schönheitsfehler ausbessern
+
+## Umsetzung (Teil 2)
+02.02.2021:
+  - WPF-Seiten und MVVM-Modelle erstellt 
+  - Haupt-Fenster erstellt
+  - WindowController sammt Schnittstelle erstellt
+  - NotifyPropertyChanged und RelayCommand übernommen
+  - nuGet Paket "MahApps.Metro" Version="2.4.3" installiert
+  - Zusätzliche Methoden zum Datum Filtern
+
+## Umsetzung (Teil 2 - Fortsetzung)
+16.02.2021:
