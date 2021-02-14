@@ -17,7 +17,7 @@ namespace CoronaTest.Persistence.Migrations
             modelBuilder
                 .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.0");
+                .HasAnnotation("ProductVersion", "5.0.2");
 
             modelBuilder.Entity("CampaignTestCenter", b =>
                 {
@@ -67,20 +67,39 @@ namespace CoronaTest.Persistence.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<int?>("ExaminationAtId")
+                    b.Property<int?>("CampaignId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("ExaminationAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Identifier")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ParticipantId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Result")
+                        .HasColumnType("int");
 
                     b.Property<byte[]>("RowVersion")
                         .IsConcurrencyToken()
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("rowversion");
 
+                    b.Property<int>("State")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("TestCenterId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("ExaminationAtId");
+                    b.HasIndex("CampaignId");
+
+                    b.HasIndex("ParticipantId");
+
+                    b.HasIndex("TestCenterId");
 
                     b.ToTable("Examinations");
                 });
@@ -231,11 +250,23 @@ namespace CoronaTest.Persistence.Migrations
 
             modelBuilder.Entity("CoronaTest.Core.Entities.Examination", b =>
                 {
-                    b.HasOne("CoronaTest.Core.Entities.TestCenter", "ExaminationAt")
+                    b.HasOne("CoronaTest.Core.Entities.Campaign", "Campaign")
                         .WithMany()
-                        .HasForeignKey("ExaminationAtId");
+                        .HasForeignKey("CampaignId");
 
-                    b.Navigation("ExaminationAt");
+                    b.HasOne("CoronaTest.Core.Entities.Participant", "Participant")
+                        .WithMany()
+                        .HasForeignKey("ParticipantId");
+
+                    b.HasOne("CoronaTest.Core.Entities.TestCenter", "TestCenter")
+                        .WithMany()
+                        .HasForeignKey("TestCenterId");
+
+                    b.Navigation("Campaign");
+
+                    b.Navigation("Participant");
+
+                    b.Navigation("TestCenter");
                 });
 
             modelBuilder.Entity("CoronaTest.Core.Entities.VerificationToken", b =>

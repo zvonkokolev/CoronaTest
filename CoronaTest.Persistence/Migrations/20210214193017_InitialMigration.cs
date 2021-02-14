@@ -121,7 +121,12 @@ namespace CoronaTest.Persistence.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ExaminationAtId = table.Column<int>(type: "int", nullable: true),
+                    CampaignId = table.Column<int>(type: "int", nullable: true),
+                    ParticipantId = table.Column<int>(type: "int", nullable: true),
+                    TestCenterId = table.Column<int>(type: "int", nullable: true),
+                    Result = table.Column<int>(type: "int", nullable: false),
+                    State = table.Column<int>(type: "int", nullable: false),
+                    ExaminationAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Identifier = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     RowVersion = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: true)
                 },
@@ -129,8 +134,20 @@ namespace CoronaTest.Persistence.Migrations
                 {
                     table.PrimaryKey("PK_Examinations", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Examinations_TestCenters_ExaminationAtId",
-                        column: x => x.ExaminationAtId,
+                        name: "FK_Examinations_Campaigns_CampaignId",
+                        column: x => x.CampaignId,
+                        principalTable: "Campaigns",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Examinations_Participants_ParticipantId",
+                        column: x => x.ParticipantId,
+                        principalTable: "Participants",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Examinations_TestCenters_TestCenterId",
+                        column: x => x.TestCenterId,
                         principalTable: "TestCenters",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -142,9 +159,19 @@ namespace CoronaTest.Persistence.Migrations
                 column: "AvailableTestCentersId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Examinations_ExaminationAtId",
+                name: "IX_Examinations_CampaignId",
                 table: "Examinations",
-                column: "ExaminationAtId");
+                column: "CampaignId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Examinations_ParticipantId",
+                table: "Examinations",
+                column: "ParticipantId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Examinations_TestCenterId",
+                table: "Examinations",
+                column: "TestCenterId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_VerificationTokens_ParticipantId",

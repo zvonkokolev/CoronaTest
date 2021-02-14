@@ -1,4 +1,5 @@
-﻿using CoronaTest.Core.Entities;
+﻿using CoronaTest.Core.DTOs;
+using CoronaTest.Core.Entities;
 using CoronaTest.Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -38,6 +39,21 @@ namespace CoronaTest.Persistence
 
         public async Task<int> GetCountAsync() =>
             await _dbContext.Examinations.CountAsync();
+
+        public async Task<List<TestsDto>> GetAllExaminationsDtosAsync() =>
+            await _dbContext.Examinations.Select(t => new TestsDto(t))
+            .ToListAsync();
+
+        public async Task<List<TestsDto>> GetFilteredTests
+            (DateTime selectedDateFilterFrom, DateTime selectedDateFilterTo)
+        {
+            var a = await GetAllExaminationsDtosAsync();
+            return a
+                .Where(p => p.ExaminationAt >= selectedDateFilterFrom 
+                            && p.ExaminationAt <= selectedDateFilterTo)
+                .ToList()
+                ;
+        }
 
     }
 }

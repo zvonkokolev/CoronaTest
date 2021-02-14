@@ -1,4 +1,5 @@
-﻿using CoronaTest.Core.Entities;
+﻿using CoronaTest.Core.DTOs;
+using CoronaTest.Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,5 +16,7 @@ namespace CoronaTest.Core.Interfaces
         bool IsExistingExamination(int id);
         void UpdateExamination(Examination examination);
         Task<int> GetCountAsync();
+        Task<List<TestsDto>> GetAllExaminationsDtosAsync();
+        Task<List<TestsDto>> GetFilteredTests(DateTime selectedDateFilterFrom, DateTime selectedDateFilterTo);
     }
 }

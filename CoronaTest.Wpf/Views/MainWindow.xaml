@@ -1,0 +1,72 @@
+﻿<controls:MetroWindow x:Class="CoronaTest.Wpf.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CoronaTest.Wpf.Views"
+        xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                   HorizontalAlignment="Left" Margin="10,10,0,0" 
+                   Text="Testübersicht" TextWrapping="Wrap" 
+                   VerticalAlignment="Top"/>
+        <Label Grid.Row="1" Grid.Column="0" Content="Datum von: " 
+               HorizontalAlignment="Left" Margin="10,5,0,0" 
+               VerticalAlignment="Top"/>
+        <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" 
+                 Margin="10,10,0,0" Text="{Binding Path=SelectedDateFilterFrom}" 
+                 TextWrapping="Wrap" VerticalAlignment="Top" Width="50"/>
+        <Label Grid.Row="1" Content="Datum bis: " Grid.Column="2" 
+               HorizontalAlignment="Left" Margin="10,5,0,0" 
+               VerticalAlignment="Top"/>
+        <TextBox Grid.Row="1" Grid.Column="3" HorizontalAlignment="Left"
+                 Margin="10,10,0,0" Text="{Binding Path=SelectedDateFilterTo}"
+                 TextWrapping="Wrap" VerticalAlignment="Top" Width="50"/>
+        <Button Grid.Row="1" Content="FILTER ANWENDEN" Grid.Column="4" 
+                HorizontalAlignment="Left" Margin="10,5,0,0" 
+                VerticalAlignment="Top" 
+                Command="{Binding Path=CmdDateFilter, UpdateSourceTrigger=PropertyChanged}"/>
+        <DataGrid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5"
+                 ItemsSource="{Binding Path=TestsDto}"
+                 SelectedItem="{Binding Path=SelectedTest}"
+                  AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Teilnehmer." Binding="{Binding ParticipantFullname}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Resultat" Binding="{Binding TestResult}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Datum" Binding="{Binding ExaminationAt}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="5"
+                   HorizontalAlignment="Left" Margin="10,0,0,0" 
+                   Text="Summe aller Tests: "
+                   TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBox Grid.Row="3" Grid.Column="4" 
+                 Text="{Binding Path=TestCount, UpdateSourceTrigger=PropertyChanged}"/>
+        <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
+                Content="Positiv" HorizontalAlignment="Left"
+                Margin="20,10,0,10" VerticalAlignment="Top"
+                Command="{Binding Path=CmdTestRes}"/>
+        
+        <!--<Button Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="2" 
+                Content="Negativ" HorizontalAlignment="Left" 
+                Margin="20,10,0,10" VerticalAlignment="Top"
+                Command="{Binding Path=CmdTestRes}"/>-->
+
+    </Grid>
+</controls:MetroWindow>

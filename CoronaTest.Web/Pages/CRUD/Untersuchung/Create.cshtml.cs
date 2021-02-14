@@ -120,7 +120,7 @@ namespace CoronaTest.Web.Pages.CRUD.Untersuchung
                 Message = "Es ist kein freie Termin vorhanden";
                 return Page();
             }
-            Examination.ExaminationAt = Testzentrum;
+            Examination.ExaminationAt = DateTime;
             // stringRandomizer nuGet packet
             var randomizer = new Randomizer(6, new DefaultRandomizerOptions(hasNumbers: false, hasLowerAlphabets: true, hasUpperAlphabets: true));
             var examIdent = randomizer.Next();
