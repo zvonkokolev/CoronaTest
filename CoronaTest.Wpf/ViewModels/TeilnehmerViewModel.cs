@@ -1,5 +1,7 @@
 ﻿using CoronaTest.Core.DTOs;
 using CoronaTest.Core.Entities;
+using CoronaTest.Core.Interfaces;
+using CoronaTest.Persistence;
 using CoronaTest.Wpf.Common;
 using System;
 using System.Collections.Generic;
@@ -10,6 +12,22 @@ namespace CoronaTest.Wpf.ViewModels
 {
     public class TeilnehmerViewModel : BaseViewModel
     {
+        #region fields
+        private Participant _teilnehmer;
+        #endregion
+
+        #region properies
+        public Participant Teilnehmer 
+        {
+            get => _teilnehmer;
+            set
+            {
+                _teilnehmer = value;
+                OnPropertyChanged(nameof(Teilnehmer));
+            }
+        }
+        #endregion
+
         #region constructor
         public TeilnehmerViewModel(IWindowController controller) : base(controller)
         {
@@ -33,13 +51,17 @@ namespace CoronaTest.Wpf.ViewModels
         public static async Task<TeilnehmerViewModel> Create(IWindowController controller, Participant participant)
         {
             var model = new TeilnehmerViewModel(controller);
-            await model.LoadParticipant(participant);
+            await model.LoadParticipantAsync(participant);
             return model;
         }
 
-        private Task LoadParticipant(Participant participant)
+        private async Task LoadParticipantAsync(Participant participant)
         {
-            throw new NotImplementedException();
+            await using IUnitOfWork unitOfWork = new UnitOfWork();
+
+            Teilnehmer = await unitOfWork.Participants
+                .GetParticipantByIdAsync(participant.Id);
+
         }
 
         public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

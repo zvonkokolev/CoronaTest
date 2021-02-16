@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using CoronaTest.Core.Entities;
-using CoronaTest.Persistence;
 using CoronaTest.Core.Interfaces;
+using CoronaTest.Core.DTOs;
 
 namespace CoronaTest.Web.Pages.CRUD.Untersuchung
 {
@@ -20,11 +15,12 @@ namespace CoronaTest.Web.Pages.CRUD.Untersuchung
             _unitOfWork = unitOfWork;
         }
 
-        public IList<Examination> Examination { get;set; }
+        public IList<TestsDto> Examination { get;set; }
 
         public async Task OnGetAsync()
         {
-            Examination = await _unitOfWork.Examinations.GetAllExaminationsAsync();
+            Examination = await _unitOfWork.Examinations
+                .GetAllExaminationsDtosAsync();
         }
     }
 }

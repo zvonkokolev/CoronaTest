@@ -7,7 +7,37 @@
         xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro" 
         mc:Ignorable="d"
         Title="TeilnehmerWindow" Height="450" Width="800">
-    <Grid>
-        
+    <Grid Margin="0,0,0,-1">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.939*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <GroupBox Header="Employee Data" HorizontalAlignment="Center" VerticalAlignment="Center" Height="383" Margin="5,5,5,5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="5,5,5,5">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="5,5,5,5">
+                            <DataGrid x:Name="dg1" ItemsSource="{Binding Employee}" SelectedItem="{Binding SelectedEmployee}" CanUserAddRows="False"  CanUserDeleteRows="False" SelectionMode="Single" SelectedIndex="{Binding SelectedIndex}" VerticalAlignment="Top" AutoGenerateColumns="False" Margin="5,5,5,5">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Emp ID" Binding="{Binding Path=ID}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="First Name" Binding="{Binding Path=FirstName}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="Last Name" Binding="{Binding Path=LastName}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="DOB" Binding="{Binding Path=DOB,StringFormat=d}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="Gender" Binding="{Binding Path=Gender}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="Nationality" Binding="{Binding Path=Nationality}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="Language" Binding="{Binding Path=Language}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="Address" Binding="{Binding Path=Address}"></DataGridTextColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+                <Button Grid.Row="1" Content="Add Employee" Command="{Binding AddUserCommand}" Margin="5" Focusable="False" HorizontalAlignment="Left" MinWidth="200"/>
+            </Grid>
+        </GroupBox>
     </Grid>
 </controls:MetroWindow>

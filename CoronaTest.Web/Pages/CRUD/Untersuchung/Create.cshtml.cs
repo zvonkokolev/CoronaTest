@@ -8,14 +8,18 @@ using System.Collections.Generic;
 using System.Linq;
 using StringRandomizer;
 using StringRandomizer.Options;
+using CoronaTest.Utils;
 
 namespace CoronaTest.Web.Pages.CRUD.Untersuchung
 {
     public class CreateModel : PageModel
     {
+        #region fields
         private readonly IUnitOfWork _unitOfWork;
         private readonly ISmsService _smsService;
+        #endregion
 
+        #region properties
         [BindProperty]
         public string Message { get; set; }
 
@@ -42,12 +46,16 @@ namespace CoronaTest.Web.Pages.CRUD.Untersuchung
 
         [BindProperty]
         public int ParticipantId { get; set; }
+        #endregion
 
+        #region constructor
         public CreateModel(IUnitOfWork unitOfWork, ISmsService smsService)
         {
             _unitOfWork = unitOfWork;
             _smsService = smsService;
         }
+        #endregion
+
 
         public async Task<IActionResult> OnGetAsync(Guid verificationIdentifier, int participantId)
         {
@@ -75,6 +83,7 @@ namespace CoronaTest.Web.Pages.CRUD.Untersuchung
             {
                 Message = "Es ist kein Testzentrum vorhanden";
             }
+            Testzentrum = TestCenters.FirstOrDefault();
 
             return Page();
         }
@@ -91,6 +100,7 @@ namespace CoronaTest.Web.Pages.CRUD.Untersuchung
             // --------------------------------------
             if (!ModelState.IsValid)
             {
+                ParticipantId = int.Parse(cookieValue);
                 Campaigns = await _unitOfWork.Campaigns
                     .GetAllCampaignsAsync();
                 if (Campaigns == null)
@@ -104,23 +114,42 @@ namespace CoronaTest.Web.Pages.CRUD.Untersuchung
                 {
                     Message = "Es ist kein Testzentrum vorhanden";
                 }
+                Testzentrum = TestCenters.FirstOrDefault();
+                return Page();
+            }
+            Kampagne = await _unitOfWork.Campaigns
+                .GetCampaignByIdAsync(Kampagne.Id);
+            Testzentrum = await _unitOfWork.TestCenters.
+                GetTestCenterByIdAsync(Testzentrum.Id);
+            Participant p = await _unitOfWork.Participants
+                .GetParticipantByIdAsync(ParticipantId);
+
+            Examination = Examination.CreateNew();
+            Examination.TestCenter = Testzentrum;
+            Examination.Campaign = Kampagne;
+            Examination.Participant = p;
+
+            DateTime dt = ParseTimeSlot.SetExaminationAtTime(DateTime);
+            try
+            {
+                var check = await _unitOfWork.Examinations.GetExaminationsByDateTimeAsync(dt);
+
+                if (check.Count < Examination.TestCenter.SlotCapacity)
+                {
+                    Examination.ExaminationAt = dt;
+                }
+                else
+                {
+                    Message = "Es ist kein freie Termin vorhanden";
+                    return Page();
+                }
+            }
+            catch (Exception)
+            {
+                Message = "Datenbank derzeit nicht erreichbar";
                 return Page();
             }
 
-            Testzentrum = await _unitOfWork.TestCenters.
-                GetTestCenterByIdAsync(Testzentrum.Id); 
-            
-            Examination = Examination.CreateNew();
-            if(Testzentrum.SlotCapacity > 0)
-            {
-                Testzentrum.SlotCapacity -= 1;
-            }
-            else
-            {
-                Message = "Es ist kein freie Termin vorhanden";
-                return Page();
-            }
-            Examination.ExaminationAt = DateTime;
             // stringRandomizer nuGet packet
             var randomizer = new Randomizer(6, new DefaultRandomizerOptions(hasNumbers: false, hasLowerAlphabets: true, hasUpperAlphabets: true));
             var examIdent = randomizer.Next();
@@ -149,7 +178,7 @@ namespace CoronaTest.Web.Pages.CRUD.Untersuchung
                 return Page();
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("Index");
         }
     }
 }

@@ -4,4 +4,9 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CoronaTest.Core\CoronaTest.Core.csproj" />
+    <ProjectReference Include="..\CoronaTest.Persistence\CoronaTest.Persistence.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -41,8 +41,11 @@ namespace CoronaTest.Persistence
             await _dbContext.Examinations.CountAsync();
 
         public async Task<List<TestsDto>> GetAllExaminationsDtosAsync() =>
-            await _dbContext.Examinations.Select(t => new TestsDto(t))
-            .ToListAsync();
+            await _dbContext.Examinations
+                .Include(e => e.TestCenter)
+                .Include(e => e.Participant)
+                .Select(t => new TestsDto(t))
+                .ToListAsync();
 
         public async Task<List<TestsDto>> GetFilteredTests
             (DateTime selectedDateFilterFrom, DateTime selectedDateFilterTo)
@@ -51,9 +54,14 @@ namespace CoronaTest.Persistence
             return a
                 .Where(p => p.ExaminationAt >= selectedDateFilterFrom 
                             && p.ExaminationAt <= selectedDateFilterTo)
-                .ToList()
-                ;
+                .ToList();
         }
 
+        public async Task<List<Examination>> GetExaminationsByDateTimeAsync(DateTime dt) =>
+            await _dbContext.Examinations
+            .Include(e => e.TestCenter)
+            .Include(e => e.Participant)
+                    .Where(t => t.ExaminationAt == dt)
+                    .ToListAsync();
     }
 }
