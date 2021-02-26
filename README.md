@@ -21,7 +21,7 @@ Setzen eine Web Seite mithilfe von Razor Pages mit folgenden Anforderungen:
   - SMS Versand über Twilio.com integriert und auf Funktion getestet
   - Razor Seiten für WEB Applikation
   - Login Maske
- - Schönheitsfehler ausbessern
+  - Schönheitsfehler ausbessern
  
 #### Todos
  - Test auf richtige Funktion
@@ -37,3 +37,14 @@ Setzen eine Web Seite mithilfe von Razor Pages mit folgenden Anforderungen:
 
 ## Umsetzung (Teil 2 - Fortsetzung)
 16.02.2021:
+  - Kommunikation per SMS-Fenster erstellt
+  - nuGet Paket "StringRandomizer" installiert
+  - Methoden zum Identifikationsnummer erstellen
+  
+#### Todos
+ - Datumsformat unterschied Datenbank--->WPF Form
+ - Test auf richtige Funktion
+ 
+## Umsetzung (Teil 3)
+23.02.2021:
+ - API Controller
