@@ -26,13 +26,15 @@ namespace CoronaTest.Persistence
                         await _dbContext.Examinations.ToListAsync();
 
         public async Task<Examination> GetExaminationByIdAsync(int id) =>
-                        await _dbContext.Examinations.FirstOrDefaultAsync(m => m.Id == id);
+             await _dbContext.Examinations
+            .FirstOrDefaultAsync(m => m.Id == id);
 
         public bool IsExistingExamination(int id) =>
                         _dbContext.Examinations.Any(e => e.Id == id);
 
         public void RemoveExamination(Examination examination) =>
-                                    _dbContext.Examinations.Remove(examination);
+            _dbContext.Examinations
+            .Remove(examination);
 
         public void UpdateExamination(Examination examination) =>
             _dbContext.Attach(examination).State = EntityState.Modified;
@@ -49,13 +51,13 @@ namespace CoronaTest.Persistence
 
         public async Task<List<TestsDto>> GetFilteredTests
             (DateTime selectedDateFilterFrom, DateTime selectedDateFilterTo)
-        {
-            var a = await GetAllExaminationsDtosAsync();
-            return a
-                .Where(p => p.ExaminationAt >= selectedDateFilterFrom 
-                            && p.ExaminationAt <= selectedDateFilterTo)
-                .ToList();
-        }
+            {
+                var a = await GetAllExaminationsDtosAsync();
+                return a
+                    .Where(p => p.ExaminationAt >= selectedDateFilterFrom 
+                                && p.ExaminationAt <= selectedDateFilterTo)
+                    .ToList();
+            }
 
         public async Task<List<Examination>> GetExaminationsByDateTimeAsync(DateTime dt) =>
             await _dbContext.Examinations
@@ -63,5 +65,13 @@ namespace CoronaTest.Persistence
             .Include(e => e.Participant)
                     .Where(t => t.ExaminationAt == dt)
                     .ToListAsync();
+
+        public async Task<Examination> GetExaminationByIdentifierAsync(string examinationIdentifier)
+            => await _dbContext.Examinations
+               .Include(e => e.TestCenter)
+               .Include(e => e.Participant)
+               .SingleOrDefaultAsync(e => e.Identifier == examinationIdentifier)
+               ;
+
     }
 }

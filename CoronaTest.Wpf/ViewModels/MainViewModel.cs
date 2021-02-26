@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using static CoronaTest.Core.Enums.Enums;
 
 namespace CoronaTest.Wpf.ViewModels
@@ -102,13 +103,16 @@ namespace CoronaTest.Wpf.ViewModels
         #region constructor
         public MainViewModel(IWindowController controller) : base(controller)
         {
+            SelectedDateFilterFrom = DateTime.UtcNow;
+            SelectedDateFilterTo = DateTime.UtcNow;
             LoadCommandsAsync();
         }
         #endregion
 
         #region commands
-        public RelayCommand CmdDateFilter { get; set; }
-        public RelayCommand CmdTestsRes { get; set; }
+        public ICommand CmdDateFilter { get; set; }
+        public ICommand CmdTestsRes { get; set; }
+        public ICommand CmdFilterReset { get; set; }
 
         private void LoadCommandsAsync()
         {
@@ -126,11 +130,22 @@ namespace CoronaTest.Wpf.ViewModels
                     || SelectedDateFilterTo != null
                 )
                 ;
+            CmdFilterReset = new RelayCommand(
+                execute: async _ =>
+                {
+                    SelectedDateFilterFrom = DateTime.UtcNow;
+                    SelectedDateFilterTo = DateTime.UtcNow;
+                    await LoadProducts();
+                }
+                ,
+                canExecute: _ => true
+                )
+                ;
             CmdTestsRes = new RelayCommand(
                 execute: async _ =>
                 {
                     await using IUnitOfWork unitOfWork = new UnitOfWork();
-                    _title = "Resultate";
+                    _title = "Testen";
                     var controller = new WindowController();
                     TeilnehmerViewModel viewModel = await TeilnehmerViewModel.Create(controller, null);
                     controller.ShowWindow(viewModel);

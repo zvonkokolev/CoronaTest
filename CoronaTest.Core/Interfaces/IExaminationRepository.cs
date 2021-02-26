@@ -19,5 +19,6 @@ namespace CoronaTest.Core.Interfaces
         Task<List<TestsDto>> GetAllExaminationsDtosAsync();
         Task<List<TestsDto>> GetFilteredTests(DateTime selectedDateFilterFrom, DateTime selectedDateFilterTo);
         Task<List<Examination>> GetExaminationsByDateTimeAsync(DateTime dt);
+        Task<Examination> GetExaminationByIdentifierAsync(string examinationIdentifier);
     }
 }
