@@ -1,4 +1,5 @@
-﻿using CoronaTest.Core.Entities;
+﻿using CoronaTest.Core.DTOs;
+using CoronaTest.Core.Entities;
 using CoronaTest.Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -56,5 +57,35 @@ namespace CoronaTest.Persistence
             await _dbContext.TestCenters
                 .AddRangeAsync(testCenters);
 
+        public async Task<List<ZentrumDto>> GetAllTestCentersDtosAsync() =>
+            await _dbContext.TestCenters
+            .Include(tz => tz.AvailableInCampaigns)
+            .Select(tz => new ZentrumDto
+            {
+                Name = tz.Name,
+                City = tz.City,
+                Postalcode = tz.Postalcode,
+                Street = tz.Street,
+                SlotCapacity = tz.SlotCapacity,
+                AvailableInCampaigns = tz.AvailableInCampaigns
+            })
+            .ToListAsync();
+
+        public async Task<ZentrumDto> GetTestCenterDtoByIdAsync(int id)
+        {
+            var testcenter = await _dbContext.TestCenters
+            .Include(tz => tz.AvailableInCampaigns)
+            .SingleOrDefaultAsync(tz => tz.Id == id);
+
+            return new ZentrumDto
+            {
+                Name = testcenter.Name,
+                City = testcenter.City,
+                Postalcode = testcenter.Postalcode,
+                Street = testcenter.Street,
+                SlotCapacity = testcenter.SlotCapacity,
+                AvailableInCampaigns = testcenter.AvailableInCampaigns
+            };
+        }
     }
 }

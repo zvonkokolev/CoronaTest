@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoronaTest.Utils", "CoronaT
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoronaTest.ImportConsole", "CoronaTest.ImportConsole\CoronaTest.ImportConsole.csproj", "{F0A92589-3887-4D42-ACCC-29DB9989DBF5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoronaTest.Wpf", "CoronaTest.Wpf\CoronaTest.Wpf.csproj", "{9266F22C-F96D-4363-9A24-37710B78F70E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoronaTest.Wpf", "CoronaTest.Wpf\CoronaTest.Wpf.csproj", "{9266F22C-F96D-4363-9A24-37710B78F70E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoronaTest.Api", "CoronaTest.Api\CoronaTest.Api.csproj", "{17F79752-2C48-49CF-AB8C-451D0285B2EB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{9266F22C-F96D-4363-9A24-37710B78F70E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9266F22C-F96D-4363-9A24-37710B78F70E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9266F22C-F96D-4363-9A24-37710B78F70E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17F79752-2C48-49CF-AB8C-451D0285B2EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17F79752-2C48-49CF-AB8C-451D0285B2EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17F79752-2C48-49CF-AB8C-451D0285B2EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17F79752-2C48-49CF-AB8C-451D0285B2EB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,4 +1,5 @@
-﻿using CoronaTest.Core.Entities;
+﻿using CoronaTest.Core.DTOs;
+using CoronaTest.Core.Entities;
 using CoronaTest.Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -32,13 +33,40 @@ namespace CoronaTest.Persistence
 
         public async Task<List<Campaign>> GetAllCampaignsAsync() =>
             await _dbContext.Campaigns
+            .ToListAsync();
+
+        public async Task<List<KampagneDto>> GetAllCampaignsDtosAsync() =>
+            await _dbContext.Campaigns
             .Include(c => c.AvailableTestCenters)
+            .Select(c => new KampagneDto
+            {
+                Name = c.Name,
+                From = c.From,
+                To = c.To,
+                AvailableTestCenters = c.AvailableTestCenters
+            })
             .ToListAsync();
 
         public async Task<Campaign> GetCampaignByIdAsync(int id) =>
             await _dbContext.Campaigns
+                .SingleOrDefaultAsync(m => m.Id == id);
+
+        public async Task<KampagneDto> GetCampaignDtoByIdAsync(int id)
+        {
+            var campaign = await _dbContext.Campaigns
                 .Include(a => a.AvailableTestCenters)
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .SingleOrDefaultAsync(a => a.Id == id);
+            return new KampagneDto
+            {
+                Name = campaign.Name,
+                From = campaign.From,
+                To = campaign.To,
+                AvailableTestCenters = campaign.AvailableTestCenters
+            };
+        }
+
+
+
 
         public async Task<int> GetCountAsync() =>
             await _dbContext.Campaigns.CountAsync();

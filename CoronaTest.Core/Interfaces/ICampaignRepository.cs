@@ -1,4 +1,5 @@
-﻿using CoronaTest.Core.Entities;
+﻿using CoronaTest.Core.DTOs;
+using CoronaTest.Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,5 +17,6 @@ namespace CoronaTest.Core.Interfaces
         Task<Campaign> RemoveCampaignAsync(int campaignId);
         Task AddRangeAsync(IEnumerable<Campaign> campaigns);
         Task<int> GetCountAsync();
+        Task<List<KampagneDto>> GetAllCampaignsDtosAsync();
     }
 }

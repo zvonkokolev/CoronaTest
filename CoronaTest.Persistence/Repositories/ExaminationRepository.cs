@@ -73,5 +73,14 @@ namespace CoronaTest.Persistence
                .SingleOrDefaultAsync(e => e.Identifier == examinationIdentifier)
                ;
 
+        public async Task<TestsDto> GetExaminationDtoByIdAsync(int id) =>
+             await _dbContext.Examinations
+             .Include(e => e.TestCenter)
+            .Include(e => e.Participant)
+            .Where(e => e.Id == id)
+            .Select(t => new TestsDto(t))
+            .SingleOrDefaultAsync();
+            
+            
     }
 }
