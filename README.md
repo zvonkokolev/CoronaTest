@@ -47,4 +47,9 @@ Setzen eine Web Seite mithilfe von Razor Pages mit folgenden Anforderungen:
  
 ## Umsetzung (Teil 3)
 23.02.2021:
- - API Controller
+ - API Projekt erstellt
+ - nuGet Pakete "Swashbuckle.AspNetCore" Version="6.0.7" installiert
+ - nuGet Pakete "NSwag.AspNetCore" Version="13.10.6" installiert
+ - Startup.cs Datei konfiguriert
+ - Projekteigenschaften: Einstellungen angepasst
+ - 
