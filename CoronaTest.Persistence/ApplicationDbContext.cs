@@ -20,6 +20,8 @@ namespace CoronaTest.Persistence
                 .HasMany(u => u.AvailableInCampaigns);
             modelBuilder.Entity<Campaign>()
                  .HasMany(u => u.AvailableTestCenters);
+
+
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
