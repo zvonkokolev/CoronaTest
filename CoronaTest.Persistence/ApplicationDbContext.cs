@@ -1,4 +1,5 @@
 ﻿using CoronaTest.Core.Entities;
+using CoronaTest.Utils;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -13,14 +14,33 @@ namespace CoronaTest.Persistence
         public DbSet<Examination> Examinations { get; set; }
         public DbSet<Participant> Participants { get; set; }
         public DbSet<TestCenter> TestCenters { get; set; }
+        public DbSet<AuthUser> AuthUsers { get; set; }
+        public DbSet<AuthRole> AuthRoles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<TestCenter>()
-                .HasMany(u => u.AvailableInCampaigns);
-            modelBuilder.Entity<Campaign>()
-                 .HasMany(u => u.AvailableTestCenters);
+            //modelBuilder.Entity<TestCenter>()
+            //    .HasMany(u => u.AvailableInCampaigns);
+            //modelBuilder.Entity<Campaign>()
+            //     .HasMany(u => u.AvailableTestCenters);
+            base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<AuthRole>().HasData(new AuthRole { Id = 1, Name = "Admin" });
+            modelBuilder.Entity<AuthRole>().HasData(new AuthRole { Id = 2, Name = "User" });
+            modelBuilder.Entity<AuthUser>().HasData(new AuthUser
+            {
+                Id = 1,
+                UserRole = "Admin",
+                Email = "admin@htl.at",
+                Password = AuthUtils.GenerateHashedPassword("admin@htl.at")
+            });
+            modelBuilder.Entity<AuthUser>().HasData(new AuthUser
+            {
+                Id = 2,
+                UserRole = "User",
+                Email = "user@htl.at",
+                Password = AuthUtils.GenerateHashedPassword("user@htl.at")
+            });
 
         }
 

@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CoronaTest.Core\CoronaTest.Core.csproj" />
-    <ProjectReference Include="..\CoronaTest.Persistence\CoronaTest.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

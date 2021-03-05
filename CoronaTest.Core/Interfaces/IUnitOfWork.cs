@@ -13,6 +13,8 @@ namespace CoronaTest.Core.Interfaces
         ITestCenterRepository TestCenters { get; }
         IParticipantRepository Participants { get; }
         IExaminationRepository Examinations { get; }
+        IAuthUserRepository AuthUsers { get; }
+        IAuthRoleRepository AuthRoles { get; }
 
         Task<int> SaveChangesAsync();
         Task DeleteDatabaseAsync();

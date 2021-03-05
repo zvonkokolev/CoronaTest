@@ -19,6 +19,8 @@ namespace CoronaTest.Persistence
         public ITestCenterRepository TestCenters { get; }
         public IParticipantRepository Participants { get; }
         public IExaminationRepository Examinations { get; }
+        public IAuthUserRepository AuthUsers { get; }
+        public IAuthRoleRepository AuthRoles { get; }
 
         public UnitOfWork() : this(new ApplicationDbContext())
         {
@@ -32,6 +34,8 @@ namespace CoronaTest.Persistence
             TestCenters = new TestCenterRepository(_dbContext);
             Participants = new ParticipantRepository(_dbContext);
             Examinations = new ExaminationRepository(_dbContext);
+            AuthUsers = new AuthUserRepository(_dbContext);
+            AuthRoles = new AuthRoleRepository(_dbContext);
         }
 
         public async Task<int> SaveChangesAsync()

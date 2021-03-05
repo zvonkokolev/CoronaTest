@@ -80,7 +80,32 @@ namespace CoronaTest.Persistence
             .Where(e => e.Id == id)
             .Select(t => new TestsDto(t))
             .SingleOrDefaultAsync();
-            
-            
+
+        public async Task<IEnumerable<Examination>> GetExaminationsWithFilterAsync(string postalCode = null, DateTime? from = null, DateTime? to = null)
+        {
+            var query = _dbContext
+               .Examinations
+               .Include(_ => _.Participant)
+               .Include(_ => _.TestCenter)
+               .Include(_ => _.Campaign)
+               .AsQueryable();
+
+            if (postalCode != null)
+            {
+                query = query.Where(_ => _.TestCenter.Postalcode == postalCode);
+            }
+            if (from != null)
+            {
+                query = query.Where(_ => _.ExaminationAt.Date >= from.Value.Date);
+            }
+            if (to != null)
+            {
+                query = query.Where(_ => _.ExaminationAt.Date <= to.Value.Date);
+            }
+
+            return await query
+                .OrderBy(_ => _.ExaminationAt)
+                .ToArrayAsync();
+        }
     }
 }
