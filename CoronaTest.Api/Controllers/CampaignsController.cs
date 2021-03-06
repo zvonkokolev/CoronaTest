@@ -1,20 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CoronaTest.Core.Entities;
-using CoronaTest.Persistence;
 using CoronaTest.Core.Interfaces;
 using System.ComponentModel.DataAnnotations;
 using CoronaTest.Core.DTOs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CoronaTest.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize()]
     public class CampaignsController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -29,7 +28,10 @@ namespace CoronaTest.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<IEnumerable<KampagneDto>>> GetCampaigns()
         {
@@ -47,8 +49,11 @@ namespace CoronaTest.Api.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
+        [Authorize(Roles = "Admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         public async Task<ActionResult<Campaign>> GetCampaign(int id)
         {
             var campaign = await _unitOfWork.Campaigns.GetCampaignByIdAsync(id);
@@ -68,9 +73,12 @@ namespace CoronaTest.Api.Controllers
         /// <param name="campaign"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> PutCampaign(int id, Campaign campaign)
         {
@@ -106,8 +114,11 @@ namespace CoronaTest.Api.Controllers
         /// <param name="campaign"></param>
         /// <returns></returns>
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         public async Task<ActionResult<Campaign>> PostCampaign(Campaign campaign)
         {
             await _unitOfWork.Campaigns.AddCampaignAsync(campaign);
@@ -128,8 +139,11 @@ namespace CoronaTest.Api.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> DeleteCampaign(int id)
         {

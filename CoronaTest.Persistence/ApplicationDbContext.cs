@@ -19,10 +19,10 @@ namespace CoronaTest.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<TestCenter>()
-            //    .HasMany(u => u.AvailableInCampaigns);
-            //modelBuilder.Entity<Campaign>()
-            //     .HasMany(u => u.AvailableTestCenters);
+            modelBuilder.Entity<TestCenter>()
+                .HasMany(u => u.AvailableInCampaigns);
+            modelBuilder.Entity<Campaign>()
+                 .HasMany(u => u.AvailableTestCenters);
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<AuthRole>().HasData(new AuthRole { Id = 1, Name = "Admin" });

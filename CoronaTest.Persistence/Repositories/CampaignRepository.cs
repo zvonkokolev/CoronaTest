@@ -65,9 +65,6 @@ namespace CoronaTest.Persistence
             };
         }
 
-
-
-
         public async Task<int> GetCountAsync() =>
             await _dbContext.Campaigns.CountAsync();
 

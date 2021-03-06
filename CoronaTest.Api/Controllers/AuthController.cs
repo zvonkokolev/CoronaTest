@@ -54,7 +54,6 @@ namespace CoronaTest.Api.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> Login(AuthUserDto userDto)
         {
-            //var authUser = _users.SingleOrDefault(u => u.Email == userDto.Email);
             var authUser = await _unitOfWork.AuthUsers.GetByEmailAsync(userDto.Email);
             if (authUser == null)
             {
@@ -94,6 +93,12 @@ namespace CoronaTest.Api.Controllers
                 return BadRequest();
             }
 
+            var userInDb = _unitOfWork.AuthUsers.GetByEmailAsync(eMail);
+            if(userInDb != null)
+            {
+                return BadRequest();
+            }
+
             var newAuthUser = new AuthUser
             {
                 Email = eMail,
@@ -111,8 +116,7 @@ namespace CoronaTest.Api.Controllers
                 return BadRequest(ex.Message);
             }
 
-            _users.Add(newAuthUser);
-
+            //_users.Add(newAuthUser);
             return NoContent();
         }
 

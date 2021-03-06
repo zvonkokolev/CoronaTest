@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -21,13 +21,11 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
-    <PackageReference Include="NSwag.AspNetCore" Version="13.10.6" />
     <PackageReference Include="StringRandomizer" Version="1.1.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.0.7" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CoronaTest.Core\CoronaTest.Core.csproj" />
     <ProjectReference Include="..\CoronaTest.Persistence\CoronaTest.Persistence.csproj" />
     <ProjectReference Include="..\CoronaTest.Utils\CoronaTest.Utils.csproj" />
   </ItemGroup>
