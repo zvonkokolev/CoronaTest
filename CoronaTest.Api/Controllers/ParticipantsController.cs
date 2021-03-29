@@ -1,30 +1,31 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CoronaTest.Core.Entities;
+using CoronaTest.Persistence;
 using CoronaTest.Core.Interfaces;
-using System.ComponentModel.DataAnnotations;
-using CoronaTest.Core.DTOs;
 using Microsoft.AspNetCore.Authorization;
+using System.ComponentModel.DataAnnotations;
 
 namespace CoronaTest.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    // [Authorize(Roles = "Admin")]
-    public class CampaignsController : ControllerBase
+    public class ParticipantsController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public CampaignsController(IUnitOfWork unitOfWork)
+        public ParticipantsController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
         /// <summary>
-        /// returns all campaigns DTO's
+        /// returns all participants
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -33,19 +34,19 @@ namespace CoronaTest.Api.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<IEnumerable<KampagneDto>>> GetCampaigns()
+        public async Task<ActionResult<IEnumerable<Participant>>> GetParticipants()
         {
-            var campaigns = await _unitOfWork.Campaigns
-                .GetAllCampaignsDtosAsync();
-            if (campaigns == null)
+            var participants = await _unitOfWork.Participants
+                .GetAllParticipantsAsync();
+            if (participants == null)
             {
                 return NotFound();
             }
-            return Ok(campaigns);
+            return Ok(participants);
         }
 
         /// <summary>
-        /// Returns the camapaign dto by given id
+        /// Returns the participant by given id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -55,23 +56,24 @@ namespace CoronaTest.Api.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
-        public async Task<ActionResult<Campaign>> GetCampaign(int id)
+        public async Task<ActionResult<Participant>> GetParticipant(int id)
         {
-            var campaign = await _unitOfWork.Campaigns.GetCampaignByIdAsync(id);
+            var participant = await _unitOfWork.Participants
+                .GetParticipantByIdAsync(id);
 
-            if (campaign == null)
+            if (participant == null)
             {
                 return NotFound();
             }
 
-            return Ok(campaign);
+            return Ok(participant);
         }
 
         /// <summary>
-        /// Updates the given campaign
+        /// Updates the given participant
         /// </summary>
         /// <param name="id"></param>
-        /// <param name="campaign"></param>
+        /// <param name="participant"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
         [Authorize(Roles = "Admin")]
@@ -81,15 +83,15 @@ namespace CoronaTest.Api.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> PutCampaign(int id, Campaign campaign)
+        public async Task<IActionResult> PutParticipant(int id, Participant participant)
         {
-            if (id != campaign.Id)
+            if (id != participant.Id)
             {
                 return BadRequest();
             }
 
-            _unitOfWork.Campaigns
-                .UpdateCampaignsData(campaign);
+            _unitOfWork.Participants
+                .UpdateParticipantsData(participant);
 
             try
             {
@@ -97,7 +99,7 @@ namespace CoronaTest.Api.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!await CampaignExistsAsync(id))
+                if (!await ParticipantExists(id))
                 {
                     return NotFound();
                 }
@@ -111,9 +113,9 @@ namespace CoronaTest.Api.Controllers
         }
 
         /// <summary>
-        /// Posts a new campaign into the database
+        /// Posts a new participant into the database
         /// </summary>
-        /// <param name="campaign"></param>
+        /// <param name="participant"></param>
         /// <returns></returns>
         [HttpPost]
         [Authorize(Roles = "Admin")]
@@ -121,9 +123,10 @@ namespace CoronaTest.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
-        public async Task<ActionResult<Campaign>> PostCampaign(Campaign campaign)
+        public async Task<ActionResult<Participant>> PostParticipant(Participant participant)
         {
-            await _unitOfWork.Campaigns.AddCampaignAsync(campaign);
+            await _unitOfWork.Participants
+                .AddParticipantAsync(participant);
             try
             {
                 await _unitOfWork.SaveChangesAsync();
@@ -131,12 +134,12 @@ namespace CoronaTest.Api.Controllers
             catch (ValidationException e)
             {
                 return BadRequest(e.Message);
-            }
-            return CreatedAtAction("GetCampaign", new { id = campaign.Id }, campaign);
+            }         
+            return CreatedAtAction("GetParticipant", new { id = participant.Id }, participant);
         }
 
         /// <summary>
-        /// Removes campaign by given id
+        /// Removes participant by given id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -147,16 +150,17 @@ namespace CoronaTest.Api.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> DeleteCampaign(int id)
+        public async Task<IActionResult> DeleteParticipant(int id)
         {
-            var campaign = await _unitOfWork.Campaigns.GetCampaignByIdAsync(id);
-            if (campaign == null)
+            var participant = await _unitOfWork.Participants
+                .GetParticipantByIdAsync(id);
+            if (participant == null)
             {
                 return NotFound();
             }
 
-            await _unitOfWork.Campaigns
-                .RemoveCampaignAsync(campaign.Id);
+            await _unitOfWork.Participants
+                .RemoveParticipantAsync(participant.Id);
             try
             {
                 await _unitOfWork.SaveChangesAsync();
@@ -168,9 +172,10 @@ namespace CoronaTest.Api.Controllers
             return NoContent();
         }
 
-        private async Task<bool> CampaignExistsAsync(int id)
+        private async Task<bool> ParticipantExists(int id)
         {
-            return await _unitOfWork.Campaigns.GetCampaignByIdAsync(id) != null;
+            return await _unitOfWork.Participants
+                .GetParticipantByIdAsync(id) != null;
         }
     }
 }

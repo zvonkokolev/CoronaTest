@@ -28,26 +28,26 @@ namespace CoronaTest.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
-    {
-        options.RequireHttpsMetadata = false;
-        options.SaveToken = true;
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuer = true,
-            ValidIssuer = Configuration["Jwt:Issuer"],
+            .AddJwtBearer(options =>
+            {
+                options.RequireHttpsMetadata = false;
+                options.SaveToken = true;
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidIssuer = Configuration["Jwt:Issuer"],
 
-            ValidateAudience = true,
-            ValidAudience = Configuration["Jwt:Audience"],
+                    ValidateAudience = true,
+                    ValidAudience = Configuration["Jwt:Audience"],
 
-            ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(Configuration["Jwt:SecretKey"])),
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(
+                        Encoding.UTF8.GetBytes(Configuration["Jwt:SecretKey"])),
 
-            ValidateLifetime = true,
-            ClockSkew = TimeSpan.Zero
-        };
-    });
+                    ValidateLifetime = true,
+                    ClockSkew = TimeSpan.Zero
+                };
+            });
 
             services.AddSwaggerGen(config =>
             {
@@ -85,6 +85,7 @@ namespace CoronaTest.Api
                     new List<string>()
                 }});
             });
+
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             //services.AddScoped<IUnitOfWork, UnitOfWork>(serviceProvider => new UnitOfWork());
             services.AddSingleton<ISmsService>(_ => new TwilioSmsService(

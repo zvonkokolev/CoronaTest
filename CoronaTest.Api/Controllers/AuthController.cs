@@ -93,7 +93,7 @@ namespace CoronaTest.Api.Controllers
                 return BadRequest();
             }
 
-            var userInDb = _unitOfWork.AuthUsers.GetByEmailAsync(eMail);
+            AuthUser userInDb = await _unitOfWork.AuthUsers.GetByEmailAsync(eMail);
             if(userInDb != null)
             {
                 return BadRequest();
