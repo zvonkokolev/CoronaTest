@@ -52,4 +52,11 @@ Setzen eine Web Seite mithilfe von Razor Pages mit folgenden Anforderungen:
  - nuGet Pakete "NSwag.AspNetCore" Version="13.10.6" installiert
  - Startup.cs Datei konfiguriert
  - Projekteigenschaften: Einstellungen angepasst
- - 
+ 
+ ## Umsetzung (Teil 4)
+05.03.2021:
+ - API Projekt zur autentifizierung erstellt
+ - nuGet Pakete "Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.3" installiert
+ - passwort hashen tool verwendet
+ - Startup.cs Datei geändert und angepasst
+ - Projekteigenschaften: Einstellungen angepasst
