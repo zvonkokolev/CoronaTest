@@ -33,6 +33,7 @@ namespace CoronaTest.Persistence
 
         public async Task<List<Campaign>> GetAllCampaignsAsync() =>
             await _dbContext.Campaigns
+            .Include(c => c.AvailableTestCenters)
             .ToListAsync();
 
         public async Task<List<KampagneDto>> GetAllCampaignsDtosAsync() =>

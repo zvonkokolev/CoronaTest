@@ -44,9 +44,10 @@ namespace CoronaTest.Persistence
 
         public async Task<List<TestsDto>> GetAllExaminationsDtosAsync() =>
             await _dbContext.Examinations
-                .Include(e => e.TestCenter)
-                .Include(e => e.Participant)
-                .Select(t => new TestsDto(t))
+                .Include(_ => _.Participant)
+                .Include(_ => _.TestCenter)
+                .Include(_ => _.Campaign)
+                .Select(e => new TestsDto(e))
                 .ToListAsync();
 
         public async Task<List<TestsDto>> GetFilteredTests
