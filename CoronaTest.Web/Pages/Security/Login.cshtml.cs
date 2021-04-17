@@ -84,7 +84,7 @@ namespace CoronaTest.Web.Pages.Security
 			await _unitOfWork.VerificationTokens.AddAsync(verificationToken);
 			await _unitOfWork.SaveChangesAsync();
 
-			// _smsService.SendSms(Mobilenumber, $"CoronaTest - Token: {verificationToken.Token} !");
+			_smsService.SendSms(Mobilenumber, $"CoronaTest - Token: {verificationToken.Token} !");
 			// verificationToken.Token = 252766; // for testing purposes, comment out upper line and put this line active 
 			Participant participant;
 			try

@@ -5,53 +5,57 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h3>Meine Test-Resultate</h3>
 @*
-<p>
-    <a asp-page="Create">Neu</a>
-</p>
+    <p>
+        <a asp-page="Create">Neu</a>
+    </p>
 *@
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Examination[0].ParticipantFullname)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Examination[0].ExaminationAt)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Examination[0].Identifier)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Examination[0].TestResult)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.Examination) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ParticipantFullname)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ExaminationAt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Identifier)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TestResult)
-            </td>
-            <td>
-                @*
-            <a asp-page="./Edit" asp-route-id="@item.Id">Bearbeiten</a> |
-                *@
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Löschen</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Examination[0].ParticipantFullname)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Examination[0].ExaminationAt)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Examination[0].Identifier)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Examination[0].TestResult)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Examination)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ParticipantFullname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ExaminationAt)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Identifier)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TestResult)
+                    </td>
+                    <td>
+                        @*
+                            <a asp-page="../User/Edit" asp-route-id="@item.Id">Profil Bearbeiten</a>
+                            <a asp-page="./Details" asp-route-id="@item.Id">Details</a>
+                        *@
+                        <a asp-page="./Delete" asp-route-id="@item.Id">Löschen</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@*<div><a asp-page="../User/Details" asp-route-id="@Model.ParticipantId">Benutzer Details</a></div>*@

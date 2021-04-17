@@ -22,5 +22,6 @@ namespace CoronaTest.Core.Interfaces
         Task<Examination> GetExaminationByIdentifierAsync(string examinationIdentifier);
         Task<TestsDto> GetExaminationDtoByIdAsync(int id);
         Task<IEnumerable<Examination>> GetExaminationsWithFilterAsync(string postalCode = null, DateTime? from = null, DateTime? to = null);
-    }
+		Task<IList<TestsDto>> GetExaminationDtoForParticipantByIdAsync(int id);
+	}
 }

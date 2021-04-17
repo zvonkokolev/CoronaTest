@@ -4,14 +4,9 @@
     ViewData["Title"] = "Login";
 }
 
-<p>
-    <strong>
-        <textarea asp-for="Message" class="text-danger text-center w-full" rows="1" readonly="readonly" placeholder="Login Meldung"></textarea>
-    </strong>
-</p>
-
 <body>
     <form method="post">
+        <div class="alert-warning" asp-validation-summary="All">@Model.Message</div>
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label asp-for="SocialSecurityNumber" class="control-label"></label>

@@ -22,9 +22,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Campaign[0].To)
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.Campaign[0].RowVersion)
-            </th>
+            </th>*@
             <th></th>
         </tr>
     </thead>
@@ -40,9 +40,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.To)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.RowVersion)
-            </td>
+            </td>*@
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id">Bearbeiten</a> |
                 <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
