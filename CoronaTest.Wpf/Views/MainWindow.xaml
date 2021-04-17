@@ -35,14 +35,14 @@
                HorizontalAlignment="Left" Margin="10,5,0,0" 
                VerticalAlignment="Top"/>
             <DatePicker Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" 
-                 Margin="10,10,0,0" Text="{Binding Path=SelectedDateFilterFrom}" 
+                 Margin="10,10,0,0" SelectedDate="{Binding SelectedDateFilterFrom}" 
                  VerticalAlignment="Top"/>
 
             <Label Grid.Row="1"  Grid.Column="2"  Content="Datum bis: "
                HorizontalAlignment="Left" Margin="10,5,0,0" 
                VerticalAlignment="Top"/>
             <DatePicker Grid.Row="1" Grid.Column="3" HorizontalAlignment="Left"
-                 Margin="10,10,0,0" Text="{Binding Path=SelectedDateFilterTo}"
+                 Margin="10,10,0,0" SelectedDate="{Binding Path=SelectedDateFilterTo}"
                  VerticalAlignment="Top"/>
         </StackPanel>
         <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
