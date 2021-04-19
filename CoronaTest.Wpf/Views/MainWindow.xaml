@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:CoronaTest.Wpf.Views"
         xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                 mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="500">
+        Title="Corona Testzentrum" Height="450" Width="550" MinHeight="300" MinWidth="500">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -36,37 +36,38 @@
                VerticalAlignment="Top"/>
             <DatePicker Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" 
                  Margin="10,10,0,0" SelectedDate="{Binding SelectedDateFilterFrom}" 
-                 VerticalAlignment="Top"/>
+                 VerticalAlignment="Top" Background="Beige"/>
 
             <Label Grid.Row="1"  Grid.Column="2"  Content="Datum bis: "
                HorizontalAlignment="Left" Margin="10,5,0,0" 
                VerticalAlignment="Top"/>
             <DatePicker Grid.Row="1" Grid.Column="3" HorizontalAlignment="Left"
                  Margin="10,10,0,0" SelectedDate="{Binding Path=SelectedDateFilterTo}"
-                 VerticalAlignment="Top"/>
+                 VerticalAlignment="Top" Background="Beige"/>
         </StackPanel>
-        <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal">
+        <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Horizontal" Margin="15">
             <Button Grid.Row="2" Grid.Column="0"  Content="FILTER ANWENDEN"
                 HorizontalAlignment="Left" Margin="10,5,0,0" 
-                VerticalAlignment="Top" 
+                VerticalAlignment="Top" Background="Yellow"
                 Command="{Binding Path=CmdDateFilter, UpdateSourceTrigger=PropertyChanged}"/>
             <Button Grid.Row="2" Grid.Column="2"  Content="RESET FILTER"
                 HorizontalAlignment="Left" Margin="10,5,0,0"
-                VerticalAlignment="Top" 
+                VerticalAlignment="Top" Background="Tomato"
                 Command="{Binding CmdFilterReset, UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
-
-        <DataGrid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="5"
-                 ItemsSource="{Binding Path=Tests}"
-                 SelectedItem="{Binding Path=SelectedTest}"
-                  AutoGenerateColumns="False">
+        
+        <DataGrid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="5" BorderBrush="Aquamarine"
+                    ItemsSource="{Binding Path=Tests}"
+                    SelectedItem="{Binding Path=SelectedTest}"
+                    AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Teilnehmer." Binding="{Binding ParticipantFullname}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Resultat" Binding="{Binding TestResult}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Datum" Binding="{Binding ExaminationAt}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Teilnehmer" Binding="{Binding ParticipantFullname}" Foreground="DarkBlue"></DataGridTextColumn>
+                <DataGridTextColumn Header="Resultat" Binding="{Binding TestResult}" Foreground="DarkBlue"></DataGridTextColumn>
+                <DataGridTextColumn Header="Datum" Binding="{Binding ExaminationAt}" Foreground="DarkBlue"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <StackPanel Grid.Row="4" Grid.Column="0" Orientation="Horizontal">
+
+        <StackPanel Grid.Row="4" Grid.Column="0" Orientation="Horizontal" Margin="20">
             <TextBlock Grid.Row="3" Grid.Column="0"
                    HorizontalAlignment="Left" Margin="10,0,0,0" 
                    Text="Summe aller Tests: "
@@ -75,13 +76,13 @@
                  Text="{Binding Path=TestCount, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBlock Grid.Row="4" Grid.Column="0"
                    HorizontalAlignment="Left" Margin="10,0,0,0" 
-                   Text="Positive Tests: "
+                   Text="Positive Tests: " Foreground="Red"
                    TextWrapping="Wrap" VerticalAlignment="Top"/>
             <TextBox Grid.Row="4" Grid.Column="1" 
                  Text="{Binding Path=TestPos, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBlock Grid.Row="5" Grid.Column="0"
                    HorizontalAlignment="Left" Margin="10,0,0,0" 
-                   Text="Negative Tests: "
+                   Text="Negative Tests: " Foreground="Green"
                    TextWrapping="Wrap" VerticalAlignment="Top"/>
             <TextBox Grid.Row="5" Grid.Column="1" 
                  Text="{Binding Path=TestNeg, UpdateSourceTrigger=PropertyChanged}"/>

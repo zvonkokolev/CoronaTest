@@ -87,5 +87,19 @@ namespace CoronaTest.Persistence
                 AvailableInCampaigns = testcenter.AvailableInCampaigns
             };
         }
-    }
+
+		public async Task AddTestCenterAsync(ZentrumDto testCenter)
+		{
+         TestCenter center = new TestCenter
+         {
+            Name = testCenter.Name,
+            City = testCenter.City,
+            Postalcode = testCenter.Postalcode,
+            Street = testCenter.Street,
+            SlotCapacity = testCenter.SlotCapacity
+         };
+         await _dbContext.TestCenters.AddAsync(center);
+		}
+
+	}
 }
