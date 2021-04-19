@@ -4,91 +4,86 @@
 @{
     ViewData["Title"] = "Edit";
 }
-
-<h1>Bearbeiten</h1>
-
-<h3>Teilnehmer</h3>
+<h3>Teilnehmer-Einstellungen</h3>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Participant.Firstname" class="control-label"></label>
-                <input asp-for="Participant.Firstname" class="form-control" />
-                <span asp-validation-for="Participant.Firstname" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Participant.Lastname" class="control-label"></label>
-                <input asp-for="Participant.Lastname" class="form-control" />
-                <span asp-validation-for="Participant.Lastname" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Participant.SocialSecurityNumber" class="control-label"></label>
-                <input asp-for="Participant.SocialSecurityNumber" class="form-control" />
-                <span asp-validation-for="Participant.SocialSecurityNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Participant.Mobilephone" class="control-label"></label>
-                <input asp-for="Participant.Mobilephone" class="form-control" />
-                <span asp-validation-for="Participant.Mobilephone" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Participant.PhoneNumber" class="control-label"></label>
-                <input asp-for="Participant.PhoneNumber" class="form-control" />
-                <span asp-validation-for="Participant.PhoneNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Participant.Gender" class="control-label"></label>
-                <input asp-for="Participant.Gender" class="form-control" />
-                <span asp-validation-for="Participant.Gender" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Participant.Birthdate" class="control-label"></label>
-                <input asp-for="Participant.Birthdate" class="form-control" />
-                <span asp-validation-for="Participant.Birthdate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Participant.Postalcode" class="control-label"></label>
-                <input asp-for="Participant.Postalcode" class="form-control" />
-                <span asp-validation-for="Participant.Postalcode" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Participant.City" class="control-label"></label>
-                <input asp-for="Participant.City" class="form-control" />
-                <span asp-validation-for="Participant.City" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Participant.Street" class="control-label"></label>
-                <input asp-for="Participant.Street" class="form-control" />
-                <span asp-validation-for="Participant.Street" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Participant.HouseNumber" class="control-label"></label>
-                <input asp-for="Participant.HouseNumber" class="form-control" />
-                <span asp-validation-for="Participant.HouseNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Participant.Stair" class="control-label"></label>
-                <input asp-for="Participant.Stair" class="form-control" />
-                <span asp-validation-for="Participant.Stair" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Participant.Door" class="control-label"></label>
-                <input asp-for="Participant.Door" class="form-control" />
-                <span asp-validation-for="Participant.Door" class="text-danger"></span>
-            </div>
-            <input type="hidden" asp-for="Participant.Id" />
-            <input type="hidden" asp-for="Participant.RowVersion" />
-            <div class="form-group">
-                <input type="submit" value="Speichern" class="btn btn-primary" />
-            </div>
-        </form>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Participant.Firstname" class="control-label"></label>
+                    <input asp-for="Participant.Firstname" class="form-control" />
+                    <span asp-validation-for="Participant.Firstname" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Participant.Lastname" class="control-label"></label>
+                    <input asp-for="Participant.Lastname" class="form-control" />
+                    <span asp-validation-for="Participant.Lastname" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Participant.SocialSecurityNumber" class="control-label"></label>
+                    <input asp-for="Participant.SocialSecurityNumber" class="form-control" readonly />
+                    <span asp-validation-for="Participant.SocialSecurityNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Participant.Mobilephone" class="control-label"></label>
+                    <input asp-for="Participant.Mobilephone" class="form-control" />
+                    <span asp-validation-for="Participant.Mobilephone" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Participant.PhoneNumber" class="control-label"></label>
+                    <input asp-for="Participant.PhoneNumber" class="form-control" />
+                    <span asp-validation-for="Participant.PhoneNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Participant.Gender" class="control-label"></label>
+                    <input asp-for="Participant.Gender" class="form-control" />
+                    <span asp-validation-for="Participant.Gender" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Participant.Birthdate" class="control-label"></label>
+                    <input asp-for="Participant.Birthdate" class="form-control" />
+                    <span asp-validation-for="Participant.Birthdate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Participant.Postalcode" class="control-label"></label>
+                    <input asp-for="Participant.Postalcode" class="form-control" />
+                    <span asp-validation-for="Participant.Postalcode" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Participant.City" class="control-label"></label>
+                    <input asp-for="Participant.City" class="form-control" />
+                    <span asp-validation-for="Participant.City" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Participant.Street" class="control-label"></label>
+                    <input asp-for="Participant.Street" class="form-control" />
+                    <span asp-validation-for="Participant.Street" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Participant.HouseNumber" class="control-label"></label>
+                    <input asp-for="Participant.HouseNumber" class="form-control" />
+                    <span asp-validation-for="Participant.HouseNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Participant.Stair" class="control-label"></label>
+                    <input asp-for="Participant.Stair" class="form-control" />
+                    <span asp-validation-for="Participant.Stair" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Participant.Door" class="control-label"></label>
+                    <input asp-for="Participant.Door" class="form-control" />
+                    <span asp-validation-for="Participant.Door" class="text-danger"></span>
+                </div>
+                <input type="hidden" asp-for="Participant.Id" />
+                <input type="hidden" asp-for="Participant.RowVersion" />
+                <div class="form-group">
+                    <input type="submit" value="Speichern" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
-
-<div>
-    <a asp-page="./Details">Details</a>
 </div>
 
 @section Scripts {

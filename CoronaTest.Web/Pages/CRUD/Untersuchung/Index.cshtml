@@ -6,11 +6,6 @@
 }
 
 <h3>Meine Test-Resultate</h3>
-@*
-    <p>
-        <a asp-page="Create">Neu</a>
-    </p>
-*@
 <div class="container">
     <table class="table">
         <thead>
@@ -47,15 +42,16 @@
                         @Html.DisplayFor(modelItem => item.TestResult)
                     </td>
                     <td>
-                        @*
-                            <a asp-page="../User/Edit" asp-route-id="@item.Id">Profil Bearbeiten</a>
-                            <a asp-page="./Details" asp-route-id="@item.Id">Details</a>
-                        *@
+                        <a asp-page="./Details" asp-route-id="@item.Id">Details</a>
                         <a asp-page="./Delete" asp-route-id="@item.Id">Löschen</a>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
+    <form class="login100-form validate-form" method="post">
+        <div class="container-login100-form-btn p-t-10">
+            <input type="submit" value="Profil Einstellungen" class="visible-true" asp-route-id="@Model.ParticipantId">
+        </div>
+    </form>
 </div>
-@*<div><a asp-page="../User/Details" asp-route-id="@Model.ParticipantId">Benutzer Details</a></div>*@

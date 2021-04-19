@@ -9,8 +9,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace CoronaTest.Web.Pages.Security
 {
-    public class LogoutModel : PageModel
-    {
+	public class LogoutModel : PageModel
+	{
 		[BindProperty]
 		public string Message { get; set; }
 		[BindProperty]
@@ -29,19 +29,19 @@ namespace CoronaTest.Web.Pages.Security
 			LoggedUserId = int.Parse(cookieValue);
 
 			foreach (var cookie in HttpContext.Request.Cookies)
-            {
+			{
 				Response.Cookies.Delete(cookie.Key);
-            }
+			}
 
-            try
-            {
-				return RedirectToPage("Login", new 
-				{ 
-					message = "Sie haben sich abgemeldet" 
+			try
+			{
+				return RedirectToPage("Login", new
+				{
+					message = "Sie haben sich abgemeldet"
 				});
 			}
-            catch (Exception e)
-            {
+			catch (Exception e)
+			{
 				Message = e.InnerException.Message;
 				return Page();
 			}

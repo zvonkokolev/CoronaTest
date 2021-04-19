@@ -40,12 +40,16 @@ namespace CoronaTest.Web.Pages.CRUD.Untersuchung
 				return RedirectToPage("../../Security/Login");
 			}
 			// --------------------------------------------
-			//Examination = await _unitOfWork.Examinations
-			//       .GetAllExaminationsDtosAsync();
 			Examination = await _unitOfWork.Examinations
 				.GetExaminationDtoForParticipantByIdAsync(participant.Id);
 
 			return Page();
+		}
+
+		public async Task<ActionResult> OnPostAsync(int id)
+		{
+			ParticipantId = id;
+			return RedirectToPage("../User/Edit", new { id = ParticipantId });
 		}
 	}
 }

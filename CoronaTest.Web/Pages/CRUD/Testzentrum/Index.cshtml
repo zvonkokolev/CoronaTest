@@ -5,50 +5,93 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<head>
+    <style>
+        .tableFixHead {
+            overflow-y: auto;
+            height: 200px;
+        }
 
-<p>
-    <a asp-page="Create">Neuer Testzenrum</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.TestCenters[0].Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TestCenters[0].City)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TestCenters[0].Postalcode)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TestCenters[0].SlotCapacity)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.TestCenters) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.City)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Postalcode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SlotCapacity)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Bearbeiten</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Löschen</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+            .tableFixHead thead th {
+                position: sticky;
+                top: 0;
+            }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th,
+        td {
+            padding: 8px 16px;
+            border: 1px solid #ccc;
+        }
+
+        th {
+            color: green;
+            background-color: beige;
+            font: 100;
+        }
+
+        tbody {
+            color: blue;
+            font: 200;
+        }
+
+        tr {
+            background-color: #fffbf0;
+            color: #000;
+        }
+
+            tr:nth-child(odd) {
+                background-color: #e4ebf2;
+            }
+    </style>
+</head>
+
+<h3>Testezentren-Index</h3>
+<hr />
+<body>
+    <div class="text-danger text-center w-full" asp-validation-summary="All"></div>
+    <div class="tableFixHead">
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TestCenters[0].Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TestCenters[0].City)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TestCenters[0].Postalcode)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TestCenters[0].SlotCapacity)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.TestCenters)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.City)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Postalcode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SlotCapacity)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>

@@ -3,13 +3,15 @@
 @{
     ViewData["Title"] = "Logout";
 }
-<h1>Aufwiedersehen</h1>
+<h3>Aufwiedersehen</h3>
 <hr />
-<p>
+
+<div asp-validation-summary="All">@Model.Message</div>
+@*<p>
     <strong>
         <textarea asp-for="Message" class="text-danger text-center w-full" rows="1" readonly="readonly"></textarea>
     </strong>
-</p>
+</p>*@
 @*
 <body>
     <form method="post" enctype="multipart/form-data">
